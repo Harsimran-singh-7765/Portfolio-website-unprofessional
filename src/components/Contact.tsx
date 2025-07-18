@@ -205,15 +205,7 @@ const Contact: React.FC = () => {
                   <Linkedin className="w-6 h-6" />
                 </motion.a>
 
-                <motion.a
-                  href="https://twitter.com/yourusername"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, rotate: 3 }}
-                  className="w-12 h-12 bg-black/70 border border-cyan-400 rounded-lg flex items-center justify-center text-white hover:bg-cyan-700 transition-all duration-300"
-                >
-                  <Twitter className="w-6 h-6" />
-                </motion.a>
+
               </div>
             </div>
           </motion.div>
