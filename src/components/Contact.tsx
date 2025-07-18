@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, MapPin, Phone } from 'lucide-react';
+import { Send, Mail, MapPin, Phone, Github, Linkedin, Twitter } from 'lucide-react';
 import { personalInfo } from '../data/personal';
 
 const Contact: React.FC = () => {
@@ -15,26 +15,35 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
     setIsSubmitting(false);
     setFormData({ name: '', email: '', message: '' });
-    alert('Message sent! I\'ll get back to you soon.');
+    alert("Message sent! I'll get back to you soon.");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const contactInfo = [
-    { icon: Mail, label: 'Email', value: personalInfo.contact.email, href: `mailto:${personalInfo.contact.email}` },
-    { icon: Phone, label: 'Phone', value: personalInfo.contact.phone, href: `tel:${personalInfo.contact.phone.replace(/\D/g, '')}` },
-    { icon: MapPin, label: 'Location', value: personalInfo.contact.location, href: '#' }
+    {
+      icon: Mail,
+      label: 'Email',
+      value: personalInfo.contact.email,
+      href: `mailto:${personalInfo.contact.email}`
+    },
+    {
+      icon: Phone,
+      label: 'Phone',
+      value: personalInfo.contact.phone,
+      href: `tel:${personalInfo.contact.phone.replace(/\D/g, '')}`
+    },
+    {
+      icon: MapPin,
+      label: 'Location',
+      value: personalInfo.contact.location,
+      href: '#'
+    }
   ];
 
   return (
@@ -133,7 +142,7 @@ const Contact: React.FC = () => {
             </form>
           </motion.div>
 
-          {/* Contact Info */}
+          {/* Contact Info + Social */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -144,7 +153,7 @@ const Contact: React.FC = () => {
             <div className="mb-8">
               <h3 className="text-xl md:text-2xl font-orbitron font-bold text-white mb-4">Contact Info</h3>
               <p className="text-gray-300 font-vt323 text-base md:text-lg leading-relaxed">
-                Ready to embark on a digital adventure? Let's connect and build something amazing together. 
+                Ready to embark on a digital adventure? Let's connect and build something amazing together.
                 Whether it's a new project or collaboration, I'm always excited to discuss innovative ideas.
               </p>
             </div>
@@ -176,16 +185,35 @@ const Contact: React.FC = () => {
             <div className="pt-8">
               <h4 className="text-lg md:text-xl font-orbitron font-bold text-white mb-4">Connect</h4>
               <div className="flex space-x-4">
-                {['GitHub', 'LinkedIn', 'Twitter'].map((platform) => (
-                  <motion.a
-                    key={platform}
-                    href="#"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-12 h-12 bg-gradient-to-br from-red-500 to-purple-500 rounded-lg flex items-center justify-center text-white font-pixel text-xs hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
-                  >
-                    {platform[0]}
-                  </motion.a>
-                ))}
+                <motion.a
+                  href="https://github.com/yourusername"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1, rotate: 3 }}
+                  className="w-12 h-12 bg-black/70 border border-purple-400 rounded-lg flex items-center justify-center text-white hover:bg-purple-700 transition-all duration-300"
+                >
+                  <Github className="w-6 h-6" />
+                </motion.a>
+
+                <motion.a
+                  href="https://linkedin.com/in/yourusername"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1, rotate: 3 }}
+                  className="w-12 h-12 bg-black/70 border border-blue-400 rounded-lg flex items-center justify-center text-white hover:bg-blue-700 transition-all duration-300"
+                >
+                  <Linkedin className="w-6 h-6" />
+                </motion.a>
+
+                <motion.a
+                  href="https://twitter.com/yourusername"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1, rotate: 3 }}
+                  className="w-12 h-12 bg-black/70 border border-cyan-400 rounded-lg flex items-center justify-center text-white hover:bg-cyan-700 transition-all duration-300"
+                >
+                  <Twitter className="w-6 h-6" />
+                </motion.a>
               </div>
             </div>
           </motion.div>
