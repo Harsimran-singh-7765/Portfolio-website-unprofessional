@@ -186,7 +186,7 @@ const Contact: React.FC = () => {
               <h4 className="text-lg md:text-xl font-orbitron font-bold text-white mb-4">Connect</h4>
               <div className="flex space-x-4">
                 <motion.a
-                  href="https://github.com/yourusername"
+                  href="https://github.com/Harsimran-singh-7765"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, rotate: 3 }}
@@ -196,7 +196,7 @@ const Contact: React.FC = () => {
                 </motion.a>
 
                 <motion.a
-                  href="https://linkedin.com/in/yourusername"
+                  href="https://www.linkedin.com/in/harsimran-singh-6b9aaa303/"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, rotate: 3 }}
