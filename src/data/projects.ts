@@ -20,7 +20,7 @@ export const projects: Project[] = [
     tech: ['React', 'TypeScript'],
     difficulty: 4,
     status: 'Completed',
-    demoUrl: 'ai-ml-hub.vercel.app',
+    demoUrl: 'https://ai-ml-hub.vercel.app',
     githubUrl: 'https://github.com/agnibhananda/ai-ml-hub-website',
     featured: true
   },
@@ -44,7 +44,7 @@ export const projects: Project[] = [
     tech: ['FastAPI', 'Render', 'LangChain', 'FAISS', 'Gemini'],
     difficulty: 4,
     status: 'Completed',
-    demoUrl: 'ai-ml-hub.vercel.app',
+    demoUrl: 'https://ai-ml-hub.vercel.app',
     githubUrl: 'https://github.com/Harsimran-singh-7765/aimlhub-chatbot',
   },
   {
