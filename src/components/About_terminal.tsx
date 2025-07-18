@@ -182,7 +182,7 @@ useEffect(() => {
       setCurrentLineIndex((prev) => prev + 1);
       setCharIndex(0);
     }
-  }, 30); // smooth speed
+  }, 10); 
 
   return () => clearTimeout(timeout);
 }, [charIndex, currentLineIndex]);
