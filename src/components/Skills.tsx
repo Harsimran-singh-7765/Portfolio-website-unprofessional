@@ -315,7 +315,7 @@ const Skills: React.FC = () => {
                   <motion.circle
                     cx={node.x}
                     cy={node.y}
-                    r={isMobile ? "25" : "20"}
+                    r={isMobile ? "35" : "25"}
                     fill="rgba(0, 0, 0, 0.9)"
                     stroke={categoryData.color}
                     strokeWidth={isHovered ? "3" : "2"}
@@ -332,7 +332,7 @@ const Skills: React.FC = () => {
                   <motion.circle
                     cx={node.x}
                     cy={node.y}
-                    r={isMobile ? "20" : "15"}
+                    r={isMobile ? "30" : "20"}
                     fill="none"
                     stroke={categoryData.color}
                     strokeWidth="2"
@@ -349,7 +349,7 @@ const Skills: React.FC = () => {
                     y={node.y + 3}
                     textAnchor="middle"
                     fill="white"
-                    fontSize={isMobile ? "10" : "8"}
+                    fontSize={isMobile ? "10" : "10"}
                     fontFamily="VT323"
                     className="pointer-events-none"
                   >

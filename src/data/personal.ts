@@ -2,7 +2,7 @@ export const personalInfo = {
   name: 'Harsimran Singh',
   title: 'just a dev',
   subtitle: 'Building AI solutions for the future',
-  mission: 'Transforming data into intelligent solutions',
+  mission: 'Have fun',
   description: `Passionate AI engineer with expertise in machine learning, 
     deep learning, and generative AI. Specialized in Python, 
     TensorFlow, and modern AI frameworks.`,
@@ -14,8 +14,8 @@ export const personalInfo = {
   },
   
   social: {
-    github: 'https://github.com/harsimran',
-    linkedin: 'https://linkedin.com/in/harsimran',
+    github: 'https://github.com/Harsimran-singh-7765',
+    linkedin: 'https://www.linkedin.com/in/harsimran-singh-6b9aaa303/',
     twitter: 'https://twitter.com/harsimran'
   },
   

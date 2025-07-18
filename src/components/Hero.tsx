@@ -68,21 +68,19 @@ const Hero: React.FC = () => {
               
               {/* Avatar */}
               <motion.div
-                className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 md:mb-6 relative"
-                whileHover={{ scale: 1.1, rotate: 5 }}
+                className="w-full max-w-[240px] md:max-w-[300px] mx-auto mb-4 md:mb-6 relative"
+                whileHover={{ scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 300 }}
               >
-                <div className="w-full h-full border-2 border-red-400 rounded-full overflow-hidden">
+                <div className="w-full border-2 border-red-500 shadow-red-500 shadow-md">
                   <img 
-                    src='public/wanted-poster (1).png' 
+                    src="/wanted-poster (1).png"
                     alt={personalInfo.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover block"
                   />
                 </div>
-                <div className="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-6 h-6 md:w-8 md:h-8 bg-red-500 rounded-full flex items-center justify-center">
-                  <span className="text-white text-xs font-pixel">★</span>
-                </div>
               </motion.div>
+
             </div>
           </div>
         </motion.div>

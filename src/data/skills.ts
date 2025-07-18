@@ -14,82 +14,45 @@ export interface SkillCategory {
 }
 
 export const skillCategories: Record<string, SkillCategory> = {
-  'Machine Learning': {
-    name: 'Machine Learning',
+  'ML': {
+    name: 'ML',
     color: '#00ffff',
     centerX: 200,
     centerY: 150,
     skills: [
       { 
         name: 'Python', 
-        level: 95, 
+        level: 85, 
         description: 'Primary programming language for ML', 
-        experience: '4+ years' 
+        experience: ' 2+ years' 
       },
       { 
         name: 'Scikit-learn', 
-        level: 90, 
+        level: 70, 
         description: 'Classical ML algorithms', 
-        experience: '3+ years' 
+        experience: 'less than a year' 
       },
       { 
         name: 'Pandas', 
         level: 92, 
         description: 'Data manipulation and analysis', 
-        experience: '4+ years' 
+        experience: '2+ years' 
       },
       { 
         name: 'NumPy', 
         level: 88, 
         description: 'Numerical computing', 
-        experience: '4+ years' 
+        experience: '2+ years' 
       },
       { 
         name: 'Matplotlib', 
         level: 85, 
         description: 'Data visualization', 
-        experience: '3+ years' 
-      },
-    ]
-  },
-  'Deep Learning': {
-    name: 'Deep Learning',
-    color: '#e63946',
-    centerX: 600,
-    centerY: 150,
-    skills: [
-      { 
-        name: 'TensorFlow', 
-        level: 88, 
-        description: 'Deep learning framework', 
-        experience: '3+ years' 
-      },
-      { 
-        name: 'PyTorch', 
-        level: 85, 
-        description: 'Neural network development', 
-        experience: '2+ years' 
-      },
-      { 
-        name: 'Keras', 
-        level: 90, 
-        description: 'High-level neural networks API', 
-        experience: '3+ years' 
-      },
-      { 
-        name: 'OpenCV', 
-        level: 80, 
-        description: 'Computer vision', 
-        experience: '2+ years' 
-      },
-      { 
-        name: 'Hugging Face', 
-        level: 82, 
-        description: 'Transformer models', 
         experience: '2+ years' 
       },
     ]
   },
+
   'GenAI': {
     name: 'GenAI',
     color: '#8000ff',
@@ -103,10 +66,10 @@ export const skillCategories: Record<string, SkillCategory> = {
         experience: '1+ years' 
       },
       { 
-        name: 'OpenAI API', 
+        name: 'Gemini API / LLM', 
         level: 88, 
         description: 'GPT integration', 
-        experience: '2+ years' 
+        experience: '1+ years' 
       },
       { 
         name: 'CrewAI', 
@@ -121,14 +84,14 @@ export const skillCategories: Record<string, SkillCategory> = {
         experience: '2+ years' 
       },
       { 
-        name: 'Vector DBs', 
+        name: 'Vector DBs / FIAAS', 
         level: 78, 
         description: 'Embeddings and retrieval', 
         experience: '1+ years' 
       },
     ]
   },
-  'Data Engineering': {
+  'Data': {
     name: 'Data Engineering',
     color: '#ff6b35',
     centerX: 600,
@@ -140,26 +103,16 @@ export const skillCategories: Record<string, SkillCategory> = {
         description: 'Database querying', 
         experience: '4+ years' 
       },
-      { 
-        name: 'Apache Spark', 
-        level: 75, 
-        description: 'Big data processing', 
-        experience: '2+ years' 
-      },
+
       { 
         name: 'Docker', 
-        level: 82, 
+        level: 42, 
         description: 'Containerization', 
-        experience: '3+ years' 
+        experience: 'less than a year' 
       },
+
       { 
-        name: 'AWS', 
-        level: 78, 
-        description: 'Cloud infrastructure', 
-        experience: '2+ years' 
-      },
-      { 
-        name: 'FastAPI', 
+        name: 'FastAPI and Flask', 
         level: 85, 
         description: 'API development', 
         experience: '2+ years' 
@@ -176,34 +129,79 @@ export const skillCategories: Record<string, SkillCategory> = {
         name: 'React', 
         level: 88, 
         description: 'Frontend framework', 
-        experience: '3+ years' 
+        experience: '1+ years' 
       },
       { 
         name: 'Node.js', 
         level: 82, 
         description: 'Backend development', 
-        experience: '3+ years' 
+        experience: '1+ years' 
       },
       { 
         name: 'TypeScript', 
         level: 85, 
         description: 'Type-safe JavaScript', 
-        experience: '2+ years' 
+        experience: '1+ years' 
       },
       { 
         name: 'MongoDB', 
         level: 80, 
         description: 'NoSQL database', 
-        experience: '2+ years' 
+        experience: 'less than a year' 
       },
       { 
         name: 'Git', 
         level: 92, 
         description: 'Version control', 
-        experience: '4+ years' 
+        experience: '1+ years' 
       },
     ]
+  },
+  'Languages': {
+    name: 'Languages',
+    color: '#ff00aa', // bright magenta for pop!
+    centerX: 600,
+    centerY: 150,
+    skills: [
+      {
+        name: 'Python',
+        level: 90,
+        description: 'Versatile scripting & ML language',
+        experience: '2+ years'
+      },
+      {
+        name: 'C/C++',
+        level: 75,
+        description: 'DSA, systems programming, competitive',
+        experience: '2+ years'
+      },
+      {
+        name: 'Java',
+        level: 60,
+        description: 'OOP & backend basics',
+        experience: 'less than a year'
+      },
+      {
+        name: 'JavaScript',
+        level: 85,
+        description: 'Dynamic web scripting',
+        experience: '2+ years'
+      },
+      {
+        name: 'HTML',
+        level: 90,
+        description: 'Core structure of the web',
+        experience: '2+ years'
+      },
+      {
+        name: 'CSS',
+        level: 80,
+        description: 'Styling and layouts',
+        experience: '2+ years'
+      }
+    ]
   }
+
 };
 
 // Helper function to easily update skill levels

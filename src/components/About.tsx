@@ -48,7 +48,7 @@ const About: React.FC = () => {
                 className="overflow-hidden"
               >
                 <p className="mb-4">
-                  {'>'} whoami<br/>
+                  {'>'} who am i<br/>
                   <span className="text-cyan-400">{personalInfo.title} & Machine Learning Specialist</span>
                 </p>
                 <p className="mb-4">
