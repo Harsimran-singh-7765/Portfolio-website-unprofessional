@@ -3,24 +3,38 @@ import { motion } from 'framer-motion';
 import { personalInfo } from '../data/personal';
 
 const Hero: React.FC = () => {
-  const [text, setText] = useState('');
-  const fullText = `${personalInfo.name} - ${personalInfo.title}`;
-  const [isTyping, setIsTyping] = useState(true);
+const fullText = `${personalInfo.name}\n${personalInfo.title}`;
+const [displayLines, setDisplayLines] = useState<string[]>([]);
+const [isTyping, setIsTyping] = useState(true);
 
-  useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index < fullText.length) {
-        setText(fullText.slice(0, index + 1));
-        index++;
-      } else {
-        setIsTyping(false);
-        clearInterval(timer);
-      }
-    }, 100);
+useEffect(() => {
+  let index = 0;
+  let current = '';
+  const lines: string[] = [];
+  
+  const timer = setInterval(() => {
+    const char = fullText[index];
+    if (char === '\n') {
+      lines.push(current);
+      current = '';
+    } else {
+      current += char;
+    }
 
-    return () => clearInterval(timer);
-  }, []);
+    if (index === fullText.length - 1) {
+      lines.push(current); // push last line
+      setDisplayLines(lines);
+      setIsTyping(false);
+      clearInterval(timer);
+    } else {
+      setDisplayLines([...lines, current]);
+    }
+
+    index++;
+  }, 100);
+
+  return () => clearInterval(timer);
+}, []);
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -92,10 +106,21 @@ const Hero: React.FC = () => {
           transition={{ delay: 0.5, duration: 0.8 }}
           className="mb-8"
         >
-          <h1 className="text-2xl md:text-4xl lg:text-6xl font-orbitron font-bold mb-4 px-4">
-            <span className="text-white">{text}</span>
+          <h1 className="text-2xl md:text-4xl lg:text-6xl font-orbitron font-bold mb-4 px-4 leading-tight text-white">
+            {displayLines.map((line, i) => (
+              <span
+                key={i}
+                className={`block ${
+                  i === 1 ? 'text-pink-400' : 'text-white'
+                } transition-all duration-300`}
+              >
+                {line}
+              </span>
+            ))}
             {isTyping && <span className="text-red-400 animate-pulse">|</span>}
           </h1>
+
+
           <p className="text-lg md:text-xl lg:text-2xl text-gray-300 font-vt323 px-4">
             {personalInfo.subtitle}
           </p>
