@@ -67,16 +67,16 @@ const Contact: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="contact-form bg-black/40 border border-red-400 rounded-lg p-8 backdrop-blur-sm"
+            className="contact-form bg-black/40 border border-red-400 rounded-lg p-4 md:p-8 backdrop-blur-sm"
           >
             <div className="mb-6">
-              <h3 className="text-2xl font-orbitron font-bold text-white mb-2">Send Message</h3>
+              <h3 className="text-xl md:text-2xl font-orbitron font-bold text-white mb-2">Send Message</h3>
               <div className="w-16 h-1 bg-red-400"></div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-cyan-400 font-vt323 text-lg mb-2">Name</label>
+                <label className="block text-cyan-400 font-vt323 text-base md:text-lg mb-2">Name</label>
                 <input
                   type="text"
                   name="name"
@@ -89,7 +89,7 @@ const Contact: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-cyan-400 font-vt323 text-lg mb-2">Email</label>
+                <label className="block text-cyan-400 font-vt323 text-base md:text-lg mb-2">Email</label>
                 <input
                   type="email"
                   name="email"
@@ -102,7 +102,7 @@ const Contact: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-cyan-400 font-vt323 text-lg mb-2">Message</label>
+                <label className="block text-cyan-400 font-vt323 text-base md:text-lg mb-2">Message</label>
                 <textarea
                   name="message"
                   value={formData.message}
@@ -119,7 +119,7 @@ const Contact: React.FC = () => {
                 disabled={isSubmitting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-gradient-to-r from-red-500 to-purple-500 text-white py-4 rounded-lg font-orbitron font-bold text-lg flex items-center justify-center space-x-2 hover:shadow-lg hover:shadow-red-500/50 transition-all duration-300 disabled:opacity-50"
+                className="w-full bg-gradient-to-r from-red-500 to-purple-500 text-white py-3 md:py-4 rounded-lg font-orbitron font-bold text-base md:text-lg flex items-center justify-center space-x-2 hover:shadow-lg hover:shadow-red-500/50 transition-all duration-300 disabled:opacity-50"
               >
                 {isSubmitting ? (
                   <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -142,8 +142,8 @@ const Contact: React.FC = () => {
             className="space-y-8"
           >
             <div className="mb-8">
-              <h3 className="text-2xl font-orbitron font-bold text-white mb-4">Contact Info</h3>
-              <p className="text-gray-300 font-vt323 text-lg leading-relaxed">
+              <h3 className="text-xl md:text-2xl font-orbitron font-bold text-white mb-4">Contact Info</h3>
+              <p className="text-gray-300 font-vt323 text-base md:text-lg leading-relaxed">
                 Ready to embark on a digital adventure? Let's connect and build something amazing together. 
                 Whether it's a new project or collaboration, I'm always excited to discuss innovative ideas.
               </p>
@@ -159,14 +159,14 @@ const Contact: React.FC = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
                   whileHover={{ scale: 1.05 }}
-                  className="flex items-center space-x-4 p-4 bg-black/40 border border-gray-700 rounded-lg hover:border-purple-400 transition-all duration-300 group"
+                  className="flex items-center space-x-3 md:space-x-4 p-3 md:p-4 bg-black/40 border border-gray-700 rounded-lg hover:border-purple-400 transition-all duration-300 group"
                 >
                   <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <info.icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <div className="text-purple-400 font-vt323 text-sm">{info.label}</div>
-                    <div className="text-white font-orbitron">{info.value}</div>
+                    <div className="text-white font-orbitron text-sm md:text-base">{info.value}</div>
                   </div>
                 </motion.a>
               ))}
@@ -174,7 +174,7 @@ const Contact: React.FC = () => {
 
             {/* Social Links */}
             <div className="pt-8">
-              <h4 className="text-xl font-orbitron font-bold text-white mb-4">Connect</h4>
+              <h4 className="text-lg md:text-xl font-orbitron font-bold text-white mb-4">Connect</h4>
               <div className="flex space-x-4">
                 {['GitHub', 'LinkedIn', 'Twitter'].map((platform) => (
                   <motion.a

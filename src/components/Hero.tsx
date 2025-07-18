@@ -59,27 +59,27 @@ const Hero: React.FC = () => {
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1, type: 'spring' }}
-          className="bounty-poster mx-auto mb-8"
+          className="bounty-poster mx-auto mb-8 max-w-[250px] md:max-w-[300px]"
         >
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-br from-red-500/20 to-purple-500/20 rounded-lg blur-lg"></div>
-            <div className="relative bg-black/80 border-2 border-red-400 rounded-lg p-8 backdrop-blur-sm">
-              <div className="text-red-400 font-pixel text-sm mb-4">WANTED</div>
+            <div className="relative bg-black/80 border-2 border-red-400 rounded-lg p-4 md:p-8 backdrop-blur-sm">
+              <div className="text-red-400 font-pixel text-xs md:text-sm mb-4">WANTED</div>
               
               {/* Avatar */}
               <motion.div
-                className="w-32 h-32 mx-auto mb-6 relative"
+                className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 md:mb-6 relative"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ type: 'spring', stiffness: 300 }}
               >
                 <div className="w-full h-full border-2 border-red-400 rounded-full overflow-hidden">
                   <img 
-                    src={personalInfo.avatar} 
+                    src='public/wanted-poster (1).png' 
                     alt={personalInfo.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
+                <div className="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-6 h-6 md:w-8 md:h-8 bg-red-500 rounded-full flex items-center justify-center">
                   <span className="text-white text-xs font-pixel">★</span>
                 </div>
               </motion.div>
@@ -94,11 +94,11 @@ const Hero: React.FC = () => {
           transition={{ delay: 0.5, duration: 0.8 }}
           className="mb-8"
         >
-          <h1 className="text-4xl md:text-6xl font-orbitron font-bold mb-4">
+          <h1 className="text-2xl md:text-4xl lg:text-6xl font-orbitron font-bold mb-4 px-4">
             <span className="text-white">{text}</span>
             {isTyping && <span className="text-red-400 animate-pulse">|</span>}
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 font-vt323">
+          <p className="text-lg md:text-xl lg:text-2xl text-gray-300 font-vt323 px-4">
             {personalInfo.subtitle}
           </p>
         </motion.div>

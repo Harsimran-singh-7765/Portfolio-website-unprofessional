@@ -29,7 +29,7 @@ const About: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="terminal-panel bg-black/50 border border-green-400 rounded-lg p-6 backdrop-blur-sm"
+            className="terminal-panel bg-black/50 border border-green-400 rounded-lg p-4 md:p-6 backdrop-blur-sm"
           >
             <div className="flex items-center mb-4">
               <div className="flex space-x-2">
@@ -37,10 +37,10 @@ const About: React.FC = () => {
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
               </div>
-              <span className="ml-4 text-green-400 font-vt323">terminal@digital-ninja:~$</span>
+              <span className="ml-2 md:ml-4 text-green-400 font-vt323 text-sm md:text-base">terminal@harsimran:~$</span>
             </div>
             
-            <div className="font-vt323 text-green-400 text-lg leading-relaxed">
+            <div className="font-vt323 text-green-400 text-sm md:text-lg leading-relaxed">
               <motion.div
                 initial={{ width: 0 }}
                 whileInView={{ width: '100%' }}
@@ -68,7 +68,7 @@ const About: React.FC = () => {
           </motion.div>
 
           {/* Stat Cards */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-3 md:gap-6">
             {stats.map((stat, index) => (
               (() => {
                 const IconComponent = iconMap[stat.icon as keyof typeof iconMap];
@@ -80,10 +80,10 @@ const About: React.FC = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.05, rotateY: 10 }}
-                className="stat-card bg-black/40 border border-gray-700 rounded-lg p-6 text-center hover:border-cyan-400 transition-all duration-300 backdrop-blur-sm"
+                className="stat-card bg-black/40 border border-gray-700 rounded-lg p-3 md:p-6 text-center hover:border-cyan-400 transition-all duration-300 backdrop-blur-sm"
               >
-                <IconComponent className={`w-8 h-8 mx-auto mb-4 ${stat.color}`} />
-                <h3 className="text-white font-orbitron font-bold mb-2">{stat.label}</h3>
+                <IconComponent className={`w-6 h-6 md:w-8 md:h-8 mx-auto mb-2 md:mb-4 ${stat.color}`} />
+                <h3 className="text-white font-orbitron font-bold mb-2 text-sm md:text-base">{stat.label}</h3>
                 <div className="relative">
                   <div className="w-full bg-gray-700 rounded-full h-2 mb-2">
                     <motion.div
@@ -98,7 +98,7 @@ const About: React.FC = () => {
                       }`}
                     />
                   </div>
-                  <span className={`font-pixel text-sm ${stat.color}`}>{stat.value}%</span>
+                  <span className={`font-pixel text-xs md:text-sm ${stat.color}`}>{stat.value}%</span>
                 </div>
               </motion.div>
                 );

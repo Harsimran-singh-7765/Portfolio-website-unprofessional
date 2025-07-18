@@ -1,6 +1,6 @@
 export const personalInfo = {
   name: 'Harsimran Singh',
-  title: 'AI Engineer',
+  title: 'just a dev',
   subtitle: 'Building AI solutions for the future',
   mission: 'Transforming data into intelligent solutions',
   description: `Passionate AI engineer with expertise in machine learning, 
@@ -8,9 +8,9 @@ export const personalInfo = {
     TensorFlow, and modern AI frameworks.`,
   
   contact: {
-    email: 'harsimran@ai.dev',
-    phone: '+1 (555) 123-4567',
-    location: 'San Francisco, CA'
+    email: 'Harsimransingh7765@gmail.com',
+    phone: '+91 9873583560',
+    location: 'Faridabad,Haryana'
   },
   
   social: {
@@ -19,7 +19,7 @@ export const personalInfo = {
     twitter: 'https://twitter.com/harsimran'
   },
   
-  avatar: '/images/hero-avatar.jpg'
+  avatar: '/hero-avatar.jpg'
 };
 
 export const stats = [

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { skillCategories } from '../data/skills';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Skill {
   name: string;
@@ -23,12 +24,54 @@ interface SkillNode {
 const Skills: React.FC = () => {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [currentCategory, setCurrentCategory] = useState(0);
   const svgRef = useRef<SVGSVGElement>(null);
 
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Generate skill nodes with positions
-  const generateSkillNodes = (): SkillNode[] => {
+  const generateSkillNodes = (mobile: boolean = false): SkillNode[] => {
     const nodes: SkillNode[] = [];
+    
+    if (mobile) {
+      // Mobile layout: single category view
+      const categories = Object.entries(skillCategories);
+      const [category, data] = categories[currentCategory];
+      const { skills } = data;
+      
+      const centerX = 200;
+      const centerY = 150;
+      const radius = 80;
+      const angleStep = (2 * Math.PI) / skills.length;
+      
+      skills.forEach((skill, index) => {
+        const angle = index * angleStep;
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
+        
+        nodes.push({
+          id: `${category}-${skill.name}`,
+          name: skill.name,
+          level: skill.level,
+          description: skill.description,
+          experience: skill.experience,
+          x,
+          y,
+          category
+        });
+      });
+      
+      return nodes;
+    }
     
     Object.entries(skillCategories).forEach(([category, data]) => {
       const { centerX, centerY, skills } = data;
@@ -56,11 +99,39 @@ const Skills: React.FC = () => {
     return nodes;
   };
 
-  const skillNodes = generateSkillNodes();
+  const skillNodes = generateSkillNodes(isMobile);
 
   // Generate connections between related skills
-  const generateConnections = () => {
+  const generateConnections = (mobile: boolean = false) => {
     const connections = [];
+    
+    if (mobile) {
+      // Mobile: connect skills to center only
+      const categories = Object.entries(skillCategories);
+      const [category, data] = categories[currentCategory];
+      const { skills } = data;
+      
+      const centerX = 200;
+      const centerY = 150;
+      const radius = 80;
+      const angleStep = (2 * Math.PI) / skills.length;
+      
+      skills.forEach((skill, index) => {
+        const angle = index * angleStep;
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
+        
+        connections.push({
+          x1: centerX,
+          y1: centerY,
+          x2: x,
+          y2: y,
+          category
+        });
+      });
+      
+      return connections;
+    }
     
     // Connect category centers
     const categoryPositions = Object.entries(skillCategories).map(([name, data]) => ({
@@ -93,7 +164,10 @@ const Skills: React.FC = () => {
     return connections;
   };
 
-  const connections = generateConnections();
+  const connections = generateConnections(isMobile);
+
+  const categories = Object.entries(skillCategories);
+  const currentCategoryData = categories[currentCategory];
 
   return (
     <section id="skills" className="py-20 bg-gradient-to-b from-gray-900 to-black">
@@ -112,13 +186,43 @@ const Skills: React.FC = () => {
           <p className="text-gray-300 font-vt323 text-lg">Hover over nodes to explore my expertise</p>
         </motion.div>
 
-        <div className="relative bg-black/40 border border-purple-400 rounded-lg p-8 backdrop-blur-sm overflow-hidden">
+        {/* Mobile Category Navigation */}
+        {isMobile && (
+          <div className="flex items-center justify-between mb-6 bg-black/60 border border-purple-400 rounded-lg p-4">
+            <button
+              onClick={() => setCurrentCategory(Math.max(0, currentCategory - 1))}
+              disabled={currentCategory === 0}
+              className="p-2 bg-purple-500/20 border border-purple-500 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ChevronLeft className="w-5 h-5 text-purple-400" />
+            </button>
+            
+            <div className="text-center">
+              <h3 className="text-xl font-orbitron font-bold text-white">
+                {currentCategoryData[0]}
+              </h3>
+              <p className="text-purple-400 font-vt323 text-sm">
+                {currentCategory + 1} of {categories.length}
+              </p>
+            </div>
+            
+            <button
+              onClick={() => setCurrentCategory(Math.min(categories.length - 1, currentCategory + 1))}
+              disabled={currentCategory === categories.length - 1}
+              className="p-2 bg-purple-500/20 border border-purple-500 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ChevronRight className="w-5 h-5 text-purple-400" />
+            </button>
+          </div>
+        )}
+
+        <div className="relative bg-black/40 border border-purple-400 rounded-lg p-4 md:p-8 backdrop-blur-sm overflow-hidden">
           <svg
             ref={svgRef}
-            width="800"
-            height="500"
-            viewBox="0 0 800 500"
-            className="w-full h-auto"
+            width={isMobile ? "400" : "800"}
+            height={isMobile ? "300" : "500"}
+            viewBox={isMobile ? "0 0 400 300" : "0 0 800 500"}
+            className="w-full h-auto min-h-[300px]"
           >
             {/* Background grid */}
             <defs>
@@ -173,11 +277,11 @@ const Skills: React.FC = () => {
             ))}
             
             {/* Category centers */}
-            {Object.entries(skillCategories).map(([category, data]) => (
+            {(!isMobile ? Object.entries(skillCategories) : [currentCategoryData]).map(([category, data]) => (
               <g key={category}>
                 <motion.circle
-                  cx={data.centerX}
-                  cy={data.centerY}
+                  cx={isMobile ? 200 : data.centerX}
+                  cy={isMobile ? 150 : data.centerY}
                   r="25"
                   fill="rgba(0, 0, 0, 0.8)"
                   stroke={data.color}
@@ -188,22 +292,22 @@ const Skills: React.FC = () => {
                   filter={`url(#glow-${data.color === '#00ffff' ? 'cyan' : data.color === '#e63946' ? 'red' : 'purple'})`}
                 />
                 <text
-                  x={data.centerX}
-                  y={data.centerY + 5}
+                  x={isMobile ? 200 : data.centerX}
+                  y={isMobile ? 155 : data.centerY + 5}
                   textAnchor="middle"
                   fill={data.color}
-                  fontSize="10"
+                  fontSize={isMobile ? "12" : "10"}
                   fontFamily="VT323"
                   className="pointer-events-none"
                 >
-                  {category.split(' ')[0]}
+                  {isMobile ? category : category.split(' ')[0]}
                 </text>
               </g>
             ))}
             
             {/* Skill nodes */}
             {skillNodes.map((node, index) => {
-              const categoryData = skillCategories[node.category as keyof typeof skillCategories];
+              const categoryData = isMobile ? currentCategoryData[1] : skillCategories[node.category as keyof typeof skillCategories];
               const isHovered = hoveredSkill === node.id;
               
               return (
@@ -211,7 +315,7 @@ const Skills: React.FC = () => {
                   <motion.circle
                     cx={node.x}
                     cy={node.y}
-                    r="20"
+                    r={isMobile ? "25" : "20"}
                     fill="rgba(0, 0, 0, 0.9)"
                     stroke={categoryData.color}
                     strokeWidth={isHovered ? "3" : "2"}
@@ -228,14 +332,14 @@ const Skills: React.FC = () => {
                   <motion.circle
                     cx={node.x}
                     cy={node.y}
-                    r="15"
+                    r={isMobile ? "20" : "15"}
                     fill="none"
                     stroke={categoryData.color}
                     strokeWidth="2"
                     strokeDasharray={`${(node.level / 100) * 94.2} 94.2`}
                     strokeDashoffset="0"
                     initial={{ strokeDasharray: "0 94.2" }}
-                    whileInView={{ strokeDasharray: `${(node.level / 100) * 94.2} 94.2` }}
+                    whileInView={{ strokeDasharray: `${(node.level / 100) * (isMobile ? 125.6 : 94.2)} ${isMobile ? 125.6 : 94.2}` }}
                     transition={{ duration: 1.5, delay: 0.5 }}
                     transform={`rotate(-90 ${node.x} ${node.y})`}
                   />
@@ -245,7 +349,7 @@ const Skills: React.FC = () => {
                     y={node.y + 3}
                     textAnchor="middle"
                     fill="white"
-                    fontSize="8"
+                    fontSize={isMobile ? "10" : "8"}
                     fontFamily="VT323"
                     className="pointer-events-none"
                   >
@@ -257,7 +361,7 @@ const Skills: React.FC = () => {
                     y={node.y - 8}
                     textAnchor="middle"
                     fill={categoryData.color}
-                    fontSize="6"
+                    fontSize={isMobile ? "8" : "6"}
                     fontFamily="Press Start 2P"
                     className="pointer-events-none"
                   >
@@ -274,7 +378,7 @@ const Skills: React.FC = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              className="absolute bottom-4 left-4 bg-black/90 border border-cyan-400 rounded-lg p-4 backdrop-blur-sm max-w-xs"
+              className="absolute bottom-4 left-4 bg-black/90 border border-cyan-400 rounded-lg p-4 backdrop-blur-sm max-w-xs z-10"
             >
               {(() => {
                 const skill = skillNodes.find(s => s.id === hoveredSkill);
@@ -296,14 +400,14 @@ const Skills: React.FC = () => {
         </div>
         
         {/* Legend */}
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
+        <div className="mt-8 flex flex-wrap justify-center gap-2 md:gap-4">
           {Object.entries(skillCategories).map(([category, data]) => (
             <div key={category} className="flex items-center space-x-2">
               <div 
                 className="w-4 h-4 rounded-full border-2"
                 style={{ borderColor: data.color, backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
               />
-              <span className="text-gray-300 font-vt323 text-sm">{category}</span>
+              <span className="text-gray-300 font-vt323 text-xs md:text-sm">{category}</span>
             </div>
           ))}
         </div>
