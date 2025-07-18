@@ -88,7 +88,7 @@ useEffect(() => {
               >
                 <div className="w-full border-2 border-red-500 shadow-red-500 shadow-md">
                   <img 
-                    src="/wanted-poster (1).png"
+                    src="/wanted-poster (2).png"
                     alt={personalInfo.name}
                     className="w-full h-full object-cover block"
                   />
