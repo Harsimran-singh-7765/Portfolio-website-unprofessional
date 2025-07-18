@@ -1,54 +1,32 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, MapPin, Phone, Github, Linkedin, Twitter } from 'lucide-react';
+import { Send, Mail, MapPin, Phone, Github, Linkedin } from 'lucide-react';
 import { personalInfo } from '../data/personal';
 
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    setIsSubmitting(false);
-    setFormData({ name: '', email: '', message: '' });
-    alert("Message sent! I'll get back to you soon.");
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   const contactInfo = [
     {
       icon: Mail,
       label: 'Email',
       value: personalInfo.contact.email,
-      href: `mailto:${personalInfo.contact.email}`
+      href: `mailto:${personalInfo.contact.email}`,
     },
     {
       icon: Phone,
       label: 'Phone',
       value: personalInfo.contact.phone,
-      href: `tel:${personalInfo.contact.phone.replace(/\D/g, '')}`
+      href: `tel:${personalInfo.contact.phone.replace(/\D/g, '')}`,
     },
     {
       icon: MapPin,
       label: 'Location',
       value: personalInfo.contact.location,
-      href: '#'
-    }
+      href: '#',
+    },
   ];
 
   return (
     <section id="contact" className="py-20 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
-      {/* Background Effects */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-cyan-500 rounded-full blur-3xl"></div>
@@ -83,14 +61,22 @@ const Contact: React.FC = () => {
               <div className="w-16 h-1 bg-red-400"></div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            {/* ✅ FormSubmit Form */}
+            <form
+              action="https://formsubmit.co/Harsimransingh7765@gmail.com"
+              method="POST"
+              className="space-y-6"
+            >
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="box" />
+              {/* Optional redirect after submit */}
+               <input type="hidden" name="_next" value="https://portfolio-website-unprofessional.vercel.app/" /> 
+
               <div>
                 <label className="block text-cyan-400 font-vt323 text-base md:text-lg mb-2">Name</label>
                 <input
                   type="text"
                   name="name"
-                  value={formData.name}
-                  onChange={handleChange}
                   required
                   className="w-full bg-black/60 border border-gray-600 rounded-lg px-4 py-3 text-white font-vt323 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 transition-all duration-300"
                   placeholder="Enter your name..."
@@ -102,8 +88,6 @@ const Contact: React.FC = () => {
                 <input
                   type="email"
                   name="email"
-                  value={formData.email}
-                  onChange={handleChange}
                   required
                   className="w-full bg-black/60 border border-gray-600 rounded-lg px-4 py-3 text-white font-vt323 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 transition-all duration-300"
                   placeholder="Enter your email..."
@@ -114,8 +98,6 @@ const Contact: React.FC = () => {
                 <label className="block text-cyan-400 font-vt323 text-base md:text-lg mb-2">Message</label>
                 <textarea
                   name="message"
-                  value={formData.message}
-                  onChange={handleChange}
                   required
                   rows={6}
                   className="w-full bg-black/60 border border-gray-600 rounded-lg px-4 py-3 text-white font-vt323 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 transition-all duration-300 resize-none"
@@ -125,19 +107,12 @@ const Contact: React.FC = () => {
 
               <motion.button
                 type="submit"
-                disabled={isSubmitting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-gradient-to-r from-red-500 to-purple-500 text-white py-3 md:py-4 rounded-lg font-orbitron font-bold text-base md:text-lg flex items-center justify-center space-x-2 hover:shadow-lg hover:shadow-red-500/50 transition-all duration-300 disabled:opacity-50"
+                className="w-full bg-gradient-to-r from-red-500 to-purple-500 text-white py-3 md:py-4 rounded-lg font-orbitron font-bold text-base md:text-lg flex items-center justify-center space-x-2 hover:shadow-lg hover:shadow-red-500/50 transition-all duration-300"
               >
-                {isSubmitting ? (
-                  <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                ) : (
-                  <>
-                    <Send size={20} />
-                    <span>Cast Spell</span>
-                  </>
-                )}
+                <Send size={20} />
+                <span>Cast Spell</span>
               </motion.button>
             </form>
           </motion.div>
@@ -154,7 +129,6 @@ const Contact: React.FC = () => {
               <h3 className="text-xl md:text-2xl font-orbitron font-bold text-white mb-4">Contact Info</h3>
               <p className="text-gray-300 font-vt323 text-base md:text-lg leading-relaxed">
                 Ready to embark on a digital adventure? Let's connect and build something amazing together.
-                Whether it's a new project or collaboration, I'm always excited to discuss innovative ideas.
               </p>
             </div>
 
@@ -181,7 +155,6 @@ const Contact: React.FC = () => {
               ))}
             </div>
 
-            {/* Social Links */}
             <div className="pt-8">
               <h4 className="text-lg md:text-xl font-orbitron font-bold text-white mb-4">Connect</h4>
               <div className="flex space-x-4">
@@ -204,8 +177,6 @@ const Contact: React.FC = () => {
                 >
                   <Linkedin className="w-6 h-6" />
                 </motion.a>
-
-
               </div>
             </div>
           </motion.div>

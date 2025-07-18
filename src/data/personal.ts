@@ -9,7 +9,7 @@ export const personalInfo = {
   
   contact: {
     email: 'Harsimransingh7765@gmail.com',
-    phone: '+91 9873583560',
+    phone: '+91 9******560',
     location: 'Faridabad,Haryana'
   },
   
