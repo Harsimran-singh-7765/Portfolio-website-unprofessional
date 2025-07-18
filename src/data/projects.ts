@@ -62,56 +62,56 @@ export const projects: Project[] = [
     title: 'Chat Twin',
     role: 'AI Creator',
     description: 'Transforms your WhatsApp chat history into a conversational AI clone of you using cutting-edge RAG and Gemini APIs.',
-    image: '/images/project-chat-twin.jpg',
+    image: '/Chat_twin.png',
     tech: ['Gemini', 'RAG', 'FAISS', 'LangChain', 'Streamlit'],
     difficulty: 4,
     status: 'Completed',
-    demoUrl: '',
-    githubUrl: ''
+    demoUrl: 'https://chat-twin.streamlit.app/',
+    githubUrl: 'https://github.com/Harsimran-singh-7765/chat-twin-ai'
   },
   {
     title: 'AI Debate Adjudicator',
     role: 'AI Engineer',
     description: 'Analyzes traditional APD debate recordings by transcribing and evaluating them to provide fair adjudications.',
-    image: '/images/project-debate.jpg',
+    image: '/Ai_adj.jpeg',
     tech: ['Gemini', 'Whisper', 'LangChain', 'Streamlit'],
     difficulty: 5,
     status: 'Completed',
-    demoUrl: '',
-    githubUrl: ''
+    demoUrl: 'https://github.com/Harsimran-singh-7765/APD-AI-DEBATE-ANALYZER',
+    githubUrl: 'https://github.com/Harsimran-singh-7765/APD-AI-DEBATE-ANALYZER'
   },
   {
     title: 'Food Sensei',
     role: 'Hackathon Participant',
     description: 'Hackathon project for TesserX by JIIT Optica. Recognizes food from images, suggests healthy alternatives, and debunks food myths via chatbot.',
-    image: '/images/project-foodsensei.jpg',
+    image: '/Food_sensei.jpeg',
     tech: ['CrewAI', 'Flask', 'HTML', 'CSS', 'JavaScript'],
     difficulty: 4,
     status: 'Completed',
-    demoUrl: '',
-    githubUrl: ''
+    demoUrl: 'https://devfolio.co/projects/foodsensei-2df8',
+    githubUrl: 'https://github.com/Harsimran-singh-7765/FOOD-SENSEI?tab=readme-ov-file'
   },
   {
     title: 'OpenSource Buddy',
     role: 'AI Builder',
     description: 'Helps users discover beginner-friendly open-source GitHub projects using Gemini and the GitHub API.',
-    image: '/images/project-opensource.jpg',
+    image: 'opensource_buddy.jpeg',
     tech: ['CrewAI', 'Gemini', 'HTML', 'CSS', 'JavaScript'],
-    difficulty: 3,
+    difficulty: 4,
     status: 'Completed',
     demoUrl: '',
-    githubUrl: ''
+    githubUrl: 'https://github.com/Harsimran-singh-7765/OpenSource-Buddy'
   },
   {
     title: 'The Project Builder',
     role: 'AI Engineer',
     description: 'Automatically generates a complete project setup—including synopsis, documentation, codebase, and chatbot support—based on idea input.',
-    image: '/images/project-builder.jpg',
+    image: '/project-Builder.jpeg',
     tech: ['Gemini', 'CrewAI', 'HTML', 'Flask', 'CSS'],
     difficulty: 5,
     status: 'Completed',
     demoUrl: '',
-    githubUrl: ''
+    githubUrl: 'https://github.com/Harsimran-singh-7765/Project-Builder'
   }
 ];
 
