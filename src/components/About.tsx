@@ -80,24 +80,36 @@ const About: React.FC = () => {
                   whileHover={{ scale: 1.05, rotateY: 10 }}
                   className="stat-card bg-black/40 border border-gray-700 rounded-lg p-3 md:p-6 text-center hover:border-cyan-400 transition-all duration-300 backdrop-blur-sm"
                 >
-                  <IconComponent className={`w-6 h-6 md:w-8 md:h-8 mx-auto mb-2 md:mb-4 ${stat.color}`} />
-                  <h3 className="text-white font-orbitron font-bold mb-2 text-sm md:text-base">{stat.label}</h3>
-                  <div className="relative">
-                    <div className="w-full bg-gray-700 rounded-full h-2 mb-2">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${stat.value}%` }}
-                        transition={{ duration: 1.5, delay: 0.5 }}
-                        className={`h-2 rounded-full bg-gradient-to-r ${
-                          stat.color.includes('cyan') ? 'from-cyan-400 to-blue-400' :
-                          stat.color.includes('red') ? 'from-red-400 to-pink-400' :
-                          stat.color.includes('purple') ? 'from-purple-400 to-indigo-400' :
-                          'from-green-400 to-emerald-400'
-                        }`}
-                      />
-                    </div>
-                    <span className={`font-pixel text-xs md:text-sm ${stat.color}`}>{stat.value}%</span>
-                  </div>
+<IconComponent className={`w-6 h-6 md:w-8 md:h-8 mx-auto mb-2 md:mb-4 ${stat.color}`} />
+<h3 className="text-white font-orbitron font-bold mb-2 text-sm md:text-base">{stat.label}</h3>
+<div className="relative">
+  <div className="w-full bg-gray-700 rounded-full h-2 mb-2">
+    <motion.div
+      initial={{ width: 0 }}
+      whileInView={{ width: `${Math.min(stat.value, 100)}%` }}
+      transition={{ duration: 1.5, delay: 0.5 }}
+      className={`h-2 rounded-full ${
+        stat.value > 100
+          ? 'bg-gradient-to-r from-yellow-400 to-yellow-300 shadow-[0_0_12px_#facc15] animate-pulse'
+          : stat.color.includes('cyan')
+            ? 'bg-gradient-to-r from-cyan-400 to-blue-400'
+            : stat.color.includes('red')
+              ? 'bg-gradient-to-r from-red-400 to-pink-400'
+              : stat.color.includes('purple')
+                ? 'bg-gradient-to-r from-purple-400 to-indigo-400'
+                : 'bg-gradient-to-r from-green-400 to-emerald-400'
+      }`}
+    />
+  </div>
+
+  <span className={`font-pixel text-xs md:text-sm ${
+    stat.value > 100 ? 'text-yellow-400 font-bold animate-pulse' : stat.color
+  }`}>
+    {stat.value}%
+  </span>
+</div>
+
+
                 </motion.div>
               );
             })}

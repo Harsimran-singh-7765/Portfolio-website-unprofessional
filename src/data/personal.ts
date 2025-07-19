@@ -40,7 +40,7 @@ export const stats = [
   { 
     icon: 'Heart', 
     label: 'Passion', 
-    value: 100, 
+    value: 999, 
     color: 'text-purple-400',
     description: 'Love for technology and continuous learning'
   },
