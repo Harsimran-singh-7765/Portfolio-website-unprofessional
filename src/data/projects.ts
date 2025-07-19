@@ -112,10 +112,21 @@ export const projects: Project[] = [
     status: 'Completed',
     demoUrl: '',
     githubUrl: 'https://github.com/Harsimran-singh-7765/Project-Builder'
-  }
+  },
+  {
+  title: 'Game HUB',
+  role: 'Developer',
+  description: 'A Terminal-Based Game Hub featuring multiple mini-games, a virtual currency system, and file handling for persistent data storage.',
+  image: '/Game_Hub.png', 
+  tech: ['C'],
+  difficulty: 3,
+  status: 'Completed',
+  demoUrl: '',
+  githubUrl: 'https://github.com/Harsimran-singh-7765/GameHUB_SDF1'
+}
+
 ];
 
-// Helper functions for easy project management
 export const addProject = (project: Project) => {
   projects.push(project);
 };
