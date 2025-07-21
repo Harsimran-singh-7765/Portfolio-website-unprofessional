@@ -41,13 +41,15 @@ const Navigation: React.FC = () => {
   ];
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-sm border-b border-purple-500/30">
+    <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-sm border-b border-[#eeaf61]/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <span className="text-xl font-bold text-cyan-400 font-orbitron">{personalInfo.name}</span>
+            <span className="text-xl font-bold text-[#6a0d83] font-orbitron">
+              {personalInfo.name}
+            </span>
           </div>
-          
+
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navItems.map((item) => (
@@ -56,8 +58,8 @@ const Navigation: React.FC = () => {
                   onClick={() => scrollToSection(item.id)}
                   className={`px-3 py-2 text-sm font-medium transition-all duration-300 font-vt323 ${
                     activeSection === item.id
-                      ? 'text-red-400 border-b-2 border-red-400 glow-red'
-                      : 'text-gray-300 hover:text-cyan-400 hover:glow-cyan'
+                      ? 'text-[#ee5d6c] border-b-2 border-[#ee5d6c] glow-red'
+                      : 'text-gray-300 hover:text-[#ce4993] hover:glow-pink'
                   }`}
                 >
                   {item.label}
@@ -65,11 +67,11 @@ const Navigation: React.FC = () => {
               ))}
             </div>
           </div>
-          
+
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-cyan-400 transition-colors"
+              className="text-gray-300 hover:text-[#fb9062] transition-colors"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -79,15 +81,15 @@ const Navigation: React.FC = () => {
 
       {isOpen && (
         <div className="md:hidden bg-black/95 backdrop-blur-sm">
-          <div className="px-2 pt-2 pb-3 space-y-1 border-t border-purple-500/30">
+          <div className="px-2 pt-2 pb-3 space-y-1 border-t border-[#eeaf61]/30">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
                 className={`block px-3 py-2 text-base font-medium w-full text-left transition-all duration-300 font-vt323 ${
                   activeSection === item.id
-                    ? 'text-red-400 glow-red'
-                    : 'text-gray-300 hover:text-cyan-400 hover:glow-cyan'
+                    ? 'text-[#ee5d6c] glow-red'
+                    : 'text-gray-300 hover:text-[#ce4993] hover:glow-pink'
                 }`}
               >
                 {item.label}

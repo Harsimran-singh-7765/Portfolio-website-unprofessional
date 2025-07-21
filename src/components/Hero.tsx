@@ -3,38 +3,38 @@ import { motion } from 'framer-motion';
 import { personalInfo } from '../data/personal';
 
 const Hero: React.FC = () => {
-const fullText = `${personalInfo.name}\n${personalInfo.title}`;
-const [displayLines, setDisplayLines] = useState<string[]>([]);
-const [isTyping, setIsTyping] = useState(true);
+  const fullText = `${personalInfo.name}\n${personalInfo.title}`;
+  const [displayLines, setDisplayLines] = useState<string[]>([]);
+  const [isTyping, setIsTyping] = useState(true);
 
-useEffect(() => {
-  let index = 0;
-  let current = '';
-  const lines: string[] = [];
-  
-  const timer = setInterval(() => {
-    const char = fullText[index];
-    if (char === '\n') {
-      lines.push(current);
-      current = '';
-    } else {
-      current += char;
-    }
+  useEffect(() => {
+    let index = 0;
+    let current = '';
+    const lines: string[] = [];
 
-    if (index === fullText.length - 1) {
-      lines.push(current); // push last line
-      setDisplayLines(lines);
-      setIsTyping(false);
-      clearInterval(timer);
-    } else {
-      setDisplayLines([...lines, current]);
-    }
+    const timer = setInterval(() => {
+      const char = fullText[index];
+      if (char === '\n') {
+        lines.push(current);
+        current = '';
+      } else {
+        current += char;
+      }
 
-    index++;
-  }, 100);
+      if (index === fullText.length - 1) {
+        lines.push(current);
+        setDisplayLines(lines);
+        setIsTyping(false);
+        clearInterval(timer);
+      } else {
+        setDisplayLines([...lines, current]);
+      }
 
-  return () => clearInterval(timer);
-}, []);
+      index++;
+    }, 100);
+
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -48,7 +48,7 @@ useEffect(() => {
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-cyan-400 rounded-full"
+            className="absolute w-1 h-1 bg-[#fb9062] rounded-full"
             animate={{
               x: [0, Math.random() * window.innerWidth],
               y: [0, Math.random() * window.innerHeight],
@@ -76,25 +76,24 @@ useEffect(() => {
           className="bounty-poster mx-auto mb-8 max-w-[250px] md:max-w-[300px]"
         >
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-red-500/20 to-purple-500/20 rounded-lg blur-lg"></div>
-            <div className="relative bg-black/80 border-2 border-red-400 rounded-lg p-4 md:p-8 backdrop-blur-sm">
-              <div className="text-red-400 font-pixel text-xs md:text-sm mb-4">WANTED</div>
-              
+            <div className="absolute inset-0 bg-gradient-to-br from-[#fb9062]/20 to-[#6a0d83]/20 rounded-lg blur-lg"></div>
+            <div className="relative bg-black/80 border-2 border-[#fb9062] rounded-lg p-4 md:p-8 backdrop-blur-sm">
+              <div className="text-[#ee5d6c] font-pixel text-xs md:text-sm mb-4"></div>
+
               {/* Avatar */}
               <motion.div
                 className="w-full max-w-[240px] md:max-w-[300px] mx-auto mb-4 md:mb-6 relative"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 300 }}
               >
-                <div className="w-full border-2 border-red-500 shadow-red-500 shadow-md">
-                  <img 
+                <div className="w-full border-2 border-[#ee5d6c] shadow-md shadow-[#ee5d6c]">
+                  <img
                     src="/wanted-poster (2).png"
                     alt={personalInfo.name}
                     className="w-full h-full object-cover block"
                   />
                 </div>
               </motion.div>
-
             </div>
           </div>
         </motion.div>
@@ -111,15 +110,14 @@ useEffect(() => {
               <span
                 key={i}
                 className={`block ${
-                  i === 1 ? 'text-pink-400' : 'text-white'
+                  i === 1 ? 'text-[#ce4993]' : 'text-white'
                 } transition-all duration-300`}
               >
                 {line}
               </span>
             ))}
-            {isTyping && <span className="text-red-400 animate-pulse">|</span>}
+            {isTyping && <span className="text-[#eeaf61] animate-pulse">|</span>}
           </h1>
-
 
           <p className="text-lg md:text-xl lg:text-2xl text-gray-300 font-vt323 px-4">
             {personalInfo.subtitle}
@@ -134,7 +132,7 @@ useEffect(() => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-          className="anime-button bg-gradient-to-r from-red-500 to-purple-500 text-white px-8 py-4 rounded-lg font-orbitron font-bold text-lg hover:shadow-lg hover:shadow-red-500/50 transition-all duration-300"
+          className="anime-button bg-gradient-to-r from-[#ee5d6c] to-[#6a0d83] text-white px-8 py-4 rounded-lg font-orbitron font-bold text-lg hover:shadow-lg hover:shadow-[#ce4993]/50 transition-all duration-300"
         >
           Enter Digital World
         </motion.button>

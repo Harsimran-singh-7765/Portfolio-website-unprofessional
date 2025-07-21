@@ -18,7 +18,7 @@
   font-family: 'Press Start 2P', cursive;
 }
 
-/* Custom Scrollbar */
+/* === Custom Scrollbar (Updated with City Sunset) === */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -28,25 +28,42 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #e63946, #8000ff);
+  background: linear-gradient(45deg, #fb9062, #6a0d83); /* sunset-orange to deep-purple */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, #ff4757, #9c27b0);
+  background: linear-gradient(45deg, #ee5d6c, #ce4993); /* coral-pink to rose */
 }
 
-/* Glow Effects */
+/* === Glow Effects (Updated with City Sunset Palette) === */
+.glow-sunset-gold {
+  text-shadow: 0 0 10px #eeaf61, 0 0 20px #eeaf61;
+}
+
+.glow-orange {
+  text-shadow: 0 0 10px #fb9062, 0 0 20px #fb9062;
+}
+
+.glow-coral {
+  text-shadow: 0 0 10px #ee5d6c, 0 0 20px #ee5d6c;
+}
+
+.glow-rose {
+  text-shadow: 0 0 10px #ce4993, 0 0 20px #ce4993;
+}
+
+.glow-purple {
+  text-shadow: 0 0 10px #6a0d83, 0 0 20px #6a0d83;
+}
+
+/* Legacy Glow (if still used) */
 .glow-red {
   text-shadow: 0 0 10px #e63946, 0 0 20px #e63946, 0 0 30px #e63946;
 }
 
 .glow-cyan {
   text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
-}
-
-.glow-purple {
-  text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff, 0 0 30px #8000ff;
 }
 
 /* Background Grid Animation */
@@ -180,7 +197,19 @@ html {
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
+/* Hover Effects for Icons */
+.icon-hover {
+  transition: all 0.3s ease;
+}
+
+.icon-hover:hover {
+  transform: scale(1.2) rotate(5deg);
+  filter: drop-shadow(0 0 10px currentColor);
+}
+
+/* ======================= */
 /* Responsive Design */
+/* ======================= */
 @media (max-width: 768px) {
   .bounty-poster {
     max-width: 280px;
@@ -197,21 +226,18 @@ html {
   .font-orbitron {
     font-size: 0.9rem;
   }
-  
-  /* Mobile skill tree adjustments */
+
   .skill-category {
     padding: 1rem;
   }
-  
-  /* Mobile navigation improvements */
+
   .mobile-nav-item {
     padding: 0.75rem 1rem;
     font-size: 1rem;
   }
-  
-  /* Mobile form improvements */
+
   input, textarea {
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px;
   }
 }
 
@@ -231,18 +257,17 @@ html {
   .font-orbitron {
     font-size: 0.8rem;
   }
-  
-  /* Extra small mobile adjustments */
+
   .stat-card {
     padding: 0.75rem;
   }
-  
+
   .project-card {
     margin-bottom: 1rem;
   }
 }
 
-/* Loading Animation */
+/* Loading Spinner */
 .loading-spinner {
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-top: 2px solid #fff;
@@ -253,14 +278,4 @@ html {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-}
-
-/* Hover Effects for Icons */
-.icon-hover {
-  transition: all 0.3s ease;
-}
-
-.icon-hover:hover {
-  transform: scale(1.2) rotate(5deg);
-  filter: drop-shadow(0 0 10px currentColor);
 }
