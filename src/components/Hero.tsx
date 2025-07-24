@@ -5,7 +5,34 @@ import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { personalInfo } from '../data/personal';
 
+
+
+
 const Hero: React.FC = () => {
+const [imageSrc, setImageSrc] = useState('/Owner.png');
+const [isGlitching, setIsGlitching] = useState(false);
+
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setIsGlitching(true); // add glitch
+    setImageSrc('/goofy.png');
+
+    const revertTimer = setTimeout(() => {
+      setImageSrc('/Owner.png');
+
+      const stopGlitch = setTimeout(() => {
+        setIsGlitching(false); // remove glitch
+      }, 400); // glitch duration
+
+      return () => clearTimeout(stopGlitch);
+    }, 1000); // show goofy for 1 second
+
+    return () => clearTimeout(revertTimer);
+  }, 5000); // trigger after 5 seconds
+
+  return () => clearTimeout(timer);
+}, []);
+
   const fullText = `${personalInfo.name}\n${personalInfo.title}`;
   const [displayLines, setDisplayLines] = useState<string[]>([]);
   const [isTyping, setIsTyping] = useState(true);
@@ -143,14 +170,20 @@ const Hero: React.FC = () => {
         whileHover={{ scale: 1.05 }}
         transition={{ type: 'spring', stiffness: 100, damping: 10 }}
       >
-        <div className="w-[400px] h-[600px] md:w-[550px] md:h-[400px] morph-bubble overflow-hidden shadow-xl rounded-[40%/30%]">
+        <div
+  className={`w-[400px] h-[600px] md:w-[550px] md:h-[400px] morph-bubble overflow-hidden shadow-xl rounded-[40%/30%] transition-all duration-300 ${
+        isGlitching ? 'glitch-box' : ''
+      }`}
+    >
 
-          <img
-            src="/Owner.png"
-            alt={personalInfo.name}
-            className="w-full h-full object-cover scale-105 transition-transform duration-700 ease-in-out"
-            draggable={false}
-          />
+
+      <img
+        src={imageSrc}
+        alt={personalInfo.name}
+        className="w-full h-full object-cover scale-105 transition-transform duration-700 ease-in-out"
+        draggable={false}
+      />
+
         </div>
       </motion.div>
     </div>
