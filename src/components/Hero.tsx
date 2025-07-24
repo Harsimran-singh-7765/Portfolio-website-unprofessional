@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
+'use client';
+
+import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import gsap from 'gsap';
 import { personalInfo } from '../data/personal';
 
 const Hero: React.FC = () => {
@@ -7,6 +10,10 @@ const Hero: React.FC = () => {
   const [displayLines, setDisplayLines] = useState<string[]>([]);
   const [isTyping, setIsTyping] = useState(true);
 
+  const sectionRef = useRef(null);    // 👈 Full section
+  const posterRef = useRef(null);     // 👈 Bounty Poster div
+
+  // 🧠 Typewriter Effect
   useEffect(() => {
     let index = 0;
     let current = '';
@@ -36,15 +43,65 @@ const Hero: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
+  // 💫 Hover Bubble Parallax
+  useEffect(() => {
+    const section = sectionRef.current;
+    const poster = posterRef.current;
+
+    if (!section || !poster) {
+      console.log("❌ Refs not attached:", { section, poster });
+      return;
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = section.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+      console.log("🎯 Mouse move", { x, y });
+
+      gsap.to(poster, {
+        x: x * 20,
+        y: y * 20,
+        scale: 1.05,
+        duration: 0.5,
+        ease: 'power2.out'
+      });
+    };
+
+    const handleMouseLeave = () => {
+      console.log("👋 Mouse left section");
+      gsap.to(poster, {
+        x: 0,
+        y: 0,
+        scale: 1,
+        duration: 0.5,
+        ease: 'power2.out'
+      });
+    };
+
+    section.addEventListener('mousemove', handleMouseMove);
+    section.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      section.removeEventListener('mousemove', handleMouseMove);
+      section.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Animated background grid */}
-      <div className="absolute inset-0 opacity-20">
+    <section
+      id="home"
+      ref={sectionRef}
+      className="w-full h-screen flex items-center justify-center relative overflow-hidden bg-black"
+    >
+      {/* 🟣 Background Grid or Particles */}
+      <div className="absolute inset-0 opacity-20 z-0">
         <div className="grid-background"></div>
       </div>
 
-      {/* Floating particles */}
-      <div className="absolute inset-0">
+      {/* 🔴 Floating particles */}
+      <div className="absolute inset-0 z-0">
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
@@ -67,38 +124,41 @@ const Hero: React.FC = () => {
         ))}
       </div>
 
+      {/* 🔵 Content */}
       <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
-        {/* Bounty Poster Frame */}
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1, type: 'spring' }}
-          className="bounty-poster mx-auto mb-8 max-w-[250px] md:max-w-[300px]"
-        >
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#fb9062]/20 to-[#6a0d83]/20 rounded-lg blur-lg"></div>
-            <div className="relative bg-black/80 border-2 border-[#fb9062] rounded-lg p-4 md:p-8 backdrop-blur-sm">
-              <div className="text-[#ee5d6c] font-pixel text-xs md:text-sm mb-4"></div>
+        {/* 🟠 Bounty Poster Frame */}
+<motion.div
+  ref={posterRef}
+  initial={{ scale: 0.8, opacity: 0 }}
+  animate={{ scale: 1, opacity: 1 }}
+  transition={{ duration: 1, type: 'spring' }}
+  className="bounty-poster mx-auto mb-8 max-w-[250px] md:max-w-[300px] flex items-center justify-center"
+>
+  <div className="relative w-full h-full">
+    <div className="absolute inset-0 rounded-[40%/30%] "></div>
+    
+   
+      <motion.div
+        className="w-full h-full flex items-center justify-center relative"
+        whileHover={{ scale: 1.05 }}
+        transition={{ type: 'spring', stiffness: 100, damping: 10 }}
+      >
+        <div className="w-[400px] h-[600px] md:w-[550px] md:h-[400px] morph-bubble overflow-hidden shadow-xl rounded-[40%/30%]">
 
-              {/* Avatar */}
-              <motion.div
-                className="w-full max-w-[240px] md:max-w-[300px] mx-auto mb-4 md:mb-6 relative"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-              >
-                <div className="w-full border-2 border-[#ee5d6c] shadow-md shadow-[#ee5d6c]">
-                  <img
-                    src="/wanted-poster (2).png"
-                    alt={personalInfo.name}
-                    className="w-full h-full object-cover block"
-                  />
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </motion.div>
+          <img
+            src="/Owner.png"
+            alt={personalInfo.name}
+            className="w-full h-full object-cover scale-105 transition-transform duration-700 ease-in-out"
+            draggable={false}
+          />
+        </div>
+      </motion.div>
+    </div>
+ 
+</motion.div>
 
-        {/* Typewriter Text */}
+
+        {/* 🔡 Typewriter Text */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -124,7 +184,7 @@ const Hero: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* CTA Button */}
+        {/* 🟢 CTA */}
         <motion.button
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
