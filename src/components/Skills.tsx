@@ -21,11 +21,35 @@ interface SkillNode {
   category: string;
 }
 
+interface DragState {
+  isDragging: boolean;
+  draggedCategory: string | null;
+  startX: number;
+  startY: number;
+  currentX: number;
+  currentY: number;
+}
 const Skills: React.FC = () => {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [currentCategory, setCurrentCategory] = useState(0);
+  const [categoryPositions, setCategoryPositions] = useState<Record<string, { x: number; y: number }>>(
+    Object.fromEntries(
+      Object.entries(skillCategories).map(([name, data]) => [
+        name,
+        { x: data.centerX, y: data.centerY }
+      ])
+    )
+  );
+  const [dragState, setDragState] = useState<DragState>({
+    isDragging: false,
+    draggedCategory: null,
+    startX: 0,
+    startY: 0,
+    currentX: 0,
+    currentY: 0
+  });
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
@@ -38,6 +62,77 @@ const Skills: React.FC = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Handle mouse events for dragging
+  const handleMouseDown = (e: React.MouseEvent, category: string) => {
+    if (isMobile) return; // Disable dragging on mobile
+    
+    const svgRect = svgRef.current?.getBoundingClientRect();
+    if (!svgRect) return;
+    
+    const svgX = (e.clientX - svgRect.left) * (800 / svgRect.width);
+    const svgY = (e.clientY - svgRect.top) * (500 / svgRect.height);
+    
+    setDragState({
+      isDragging: true,
+      draggedCategory: category,
+      startX: svgX,
+      startY: svgY,
+      currentX: svgX,
+      currentY: svgY
+    });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!dragState.isDragging || !dragState.draggedCategory || isMobile) return;
+    
+    const svgRect = svgRef.current?.getBoundingClientRect();
+    if (!svgRect) return;
+    
+    const svgX = (e.clientX - svgRect.left) * (800 / svgRect.width);
+    const svgY = (e.clientY - svgRect.top) * (500 / svgRect.height);
+    
+    // Constrain to SVG bounds
+    const constrainedX = Math.max(50, Math.min(750, svgX));
+    const constrainedY = Math.max(50, Math.min(450, svgY));
+    
+    setDragState(prev => ({
+      ...prev,
+      currentX: constrainedX,
+      currentY: constrainedY
+    }));
+    
+    // Update category position
+    setCategoryPositions(prev => ({
+      ...prev,
+      [dragState.draggedCategory!]: {
+        x: constrainedX,
+        y: constrainedY
+      }
+    }));
+  };
+
+  const handleMouseUp = () => {
+    setDragState({
+      isDragging: false,
+      draggedCategory: null,
+      startX: 0,
+      startY: 0,
+      currentX: 0,
+      currentY: 0
+    });
+  };
+
+  // Reset positions to default
+  const resetPositions = () => {
+    setCategoryPositions(
+      Object.fromEntries(
+        Object.entries(skillCategories).map(([name, data]) => [
+          name,
+          { x: data.centerX, y: data.centerY }
+        ])
+      )
+    );
+  };
   // Generate skill nodes with positions
   const generateSkillNodes = (mobile: boolean = false): SkillNode[] => {
     const nodes: SkillNode[] = [];
@@ -74,14 +169,15 @@ const Skills: React.FC = () => {
     }
     
     Object.entries(skillCategories).forEach(([category, data]) => {
-      const { centerX, centerY, skills } = data;
+      const centerPos = categoryPositions[category] || { x: data.centerX, y: data.centerY };
+      const { skills } = data;
       const radius = 80;
       const angleStep = (2 * Math.PI) / skills.length;
       
       skills.forEach((skill, index) => {
         const angle = index * angleStep;
-        const x = centerX + radius * Math.cos(angle);
-        const y = centerY + radius * Math.sin(angle);
+        const x = centerPos.x + radius * Math.cos(angle);
+        const y = centerPos.y + radius * Math.sin(angle);
         
         nodes.push({
           id: `${category}-${skill.name}`,
@@ -133,27 +229,21 @@ const Skills: React.FC = () => {
       return connections;
     }
     
-    // Connect category centers
-    const categoryPositions = Object.entries(skillCategories).map(([name, data]) => ({
-      name,
-      x: data.centerX,
-      y: data.centerY
-    }));
-    
     // Connect skills within categories to center
     Object.entries(skillCategories).forEach(([category, data]) => {
-      const { centerX, centerY, skills } = data;
+      const centerPos = categoryPositions[category] || { x: data.centerX, y: data.centerY };
+      const { skills } = data;
       const radius = 80;
       const angleStep = (2 * Math.PI) / skills.length;
       
       skills.forEach((skill, index) => {
         const angle = index * angleStep;
-        const x = centerX + radius * Math.cos(angle);
-        const y = centerY + radius * Math.sin(angle);
+        const x = centerPos.x + radius * Math.cos(angle);
+        const y = centerPos.y + radius * Math.sin(angle);
         
         connections.push({
-          x1: centerX,
-          y1: centerY,
+          x1: centerPos.x,
+          y1: centerPos.y,
           x2: x,
           y2: y,
           category
@@ -183,7 +273,9 @@ const Skills: React.FC = () => {
             Skill <span className="text-purple-400">Tree</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-cyan-400 mx-auto mb-4"></div>
-          <p className="text-gray-300 font-vt323 text-lg">Hover over nodes to explore my expertise</p>
+          <p className="text-gray-300 font-vt323 text-lg">
+            {isMobile ? 'Tap nodes to explore my expertise' : 'Hover over nodes to explore • Drag center nodes to rearrange'}
+          </p>
         </motion.div>
 
         {/* Mobile Category Navigation */}
@@ -216,6 +308,17 @@ const Skills: React.FC = () => {
           </div>
         )}
 
+        {/* Desktop Controls */}
+        {!isMobile && (
+          <div className="flex justify-center mb-6">
+            <button
+              onClick={resetPositions}
+              className="px-4 py-2 bg-purple-500/20 border border-purple-500 rounded-lg text-purple-400 font-vt323 hover:bg-purple-500/30 transition-all duration-300"
+            >
+              Reset Layout
+            </button>
+          </div>
+        )}
         <div className="relative bg-black/40 border border-purple-400 rounded-lg p-4 md:p-8 backdrop-blur-sm overflow-hidden">
           <svg
             ref={svgRef}
@@ -223,6 +326,9 @@ const Skills: React.FC = () => {
             height={isMobile ? "300" : "500"}
             viewBox={isMobile ? "0 0 400 300" : "0 0 800 500"}
             className="w-full h-auto min-h-[300px]"
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
           >
             {/* Background grid */}
             <defs>
@@ -277,11 +383,17 @@ const Skills: React.FC = () => {
             ))}
             
             {/* Category centers */}
-            {(!isMobile ? Object.entries(skillCategories) : [currentCategoryData]).map(([category, data]) => (
-              <g key={category}>
+            {(!isMobile ? Object.entries(skillCategories) : [currentCategoryData]).map(([category, data]) => {
+              const centerPos = isMobile 
+                ? { x: 200, y: 150 }
+                : categoryPositions[category] || { x: data.centerX, y: data.centerY };
+              const isDragging = dragState.draggedCategory === category;
+              
+              return (
+                <g key={category}>
                 <motion.circle
-                  cx={isMobile ? 200 : data.centerX}
-                  cy={isMobile ? 150 : data.centerY}
+                  cx={centerPos.x}
+                  cy={centerPos.y}
                   r="25"
                   fill="rgba(0, 0, 0, 0.8)"
                   stroke={data.color}
@@ -290,10 +402,15 @@ const Skills: React.FC = () => {
                   whileInView={{ scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                   filter={`url(#glow-${data.color === '#00ffff' ? 'cyan' : data.color === '#e63946' ? 'red' : 'purple'})`}
+                  className={!isMobile ? "cursor-grab active:cursor-grabbing" : ""}
+                  onMouseDown={(e) => handleMouseDown(e, category)}
+                  style={{
+                    cursor: isDragging ? 'grabbing' : (!isMobile ? 'grab' : 'default')
+                  }}
                 />
                 <text
-                  x={isMobile ? 200 : data.centerX}
-                  y={isMobile ? 155 : data.centerY + 5}
+                  x={centerPos.x}
+                  y={centerPos.y + 5}
                   textAnchor="middle"
                   fill={data.color}
                   fontSize={isMobile ? "12" : "10"}
@@ -303,7 +420,8 @@ const Skills: React.FC = () => {
                   {isMobile ? category : category.split(' ')[0]}
                 </text>
               </g>
-            ))}
+              );
+            })}
             
             {/* Skill nodes */}
             {skillNodes.map((node, index) => {
@@ -315,7 +433,7 @@ const Skills: React.FC = () => {
                   <motion.circle
                     cx={node.x}
                     cy={node.y}
-                    r={isMobile ? "35" : "25"}
+                    r={isMobile ? "25" : "20"}
                     fill="rgba(0, 0, 0, 0.9)"
                     stroke={categoryData.color}
                     strokeWidth={isHovered ? "3" : "2"}
@@ -332,13 +450,11 @@ const Skills: React.FC = () => {
                   <motion.circle
                     cx={node.x}
                     cy={node.y}
-                    r={isMobile ? "30" : "20"}
+                    r={isMobile ? "20" : "15"}
                     fill="none"
                     stroke={categoryData.color}
                     strokeWidth="2"
-                    strokeDasharray={`${(node.level / 100) * 94.2} 94.2`}
-                    strokeDashoffset="0"
-                    initial={{ strokeDasharray: "0 94.2" }}
+                    strokeWidth="2"
                     whileInView={{ strokeDasharray: `${(node.level / 100) * (isMobile ? 125.6 : 94.2)} ${isMobile ? 125.6 : 94.2}` }}
                     transition={{ duration: 1.5, delay: 0.5 }}
                     transform={`rotate(-90 ${node.x} ${node.y})`}
@@ -346,10 +462,10 @@ const Skills: React.FC = () => {
                   
                   <text
                     x={node.x}
-                    y={node.y + 3}
+                    y={node.y + 5}
                     textAnchor="middle"
                     fill="white"
-                    fontSize={isMobile ? "10" : "10"}
+                    fontSize={isMobile ? "10" : "8"}
                     fontFamily="VT323"
                     className="pointer-events-none"
                   >
