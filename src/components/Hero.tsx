@@ -120,7 +120,7 @@ useEffect(() => {
     <section
       id="home"
       ref={sectionRef}
-      className="w-full h-screen flex items-center justify-center relative overflow-hidden bg-black"
+      className="w-full min-h-screen flex items-center justify-center relative overflow-hidden bg-black px-4 py-20 md:py-0"
     >
       {/* 🟣 Background Grid or Particles */}
       <div className="absolute inset-0 opacity-20 z-0">
@@ -129,13 +129,13 @@ useEffect(() => {
 
       {/* 🔴 Floating particles */}
       <div className="absolute inset-0 z-0">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-[#fb9062] rounded-full"
+            className="absolute w-1 h-1 bg-[#fb9062] rounded-full hidden md:block"
             animate={{
-              x: [0, Math.random() * window.innerWidth],
-              y: [0, Math.random() * window.innerHeight],
+              x: [0, Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200)],
+              y: [0, Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800)],
               opacity: [0, 1, 0],
             }}
             transition={{
@@ -152,37 +152,81 @@ useEffect(() => {
       </div>
 
       {/* 🔵 Content */}
-      <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
+      <div className="relative z-10 text-center max-w-4xl mx-auto w-full">
         {/* 🟠 Bounty Poster Frame */}
-<motion.div
-  ref={posterRef}
-  initial={{ scale: 0.8, opacity: 0 }}
-  animate={{ scale: 1, opacity: 1 }}
-  transition={{ duration: 1, type: 'spring' }}
-  className="bounty-poster mx-auto mb-8 max-w-[250px] md:max-w-[300px] flex items-center justify-center"
->
-  <div className="relative w-full h-full">
-    <div className="absolute inset-0 rounded-[40%/30%] "></div>
-    
-   
-      <motion.div
-        className="w-full h-full flex items-center justify-center relative"
-        whileHover={{ scale: 1.05 }}
-        transition={{ type: 'spring', stiffness: 100, damping: 10 }}
-      >
-        <div
-  className={`w-[400px] h-[600px] md:w-[550px] md:h-[400px] morph-bubble overflow-hidden shadow-xl rounded-[40%/30%] transition-all duration-300 ${
-        isGlitching ? 'glitch-box' : ''
-      }`}
-    >
+        <motion.div
+          ref={posterRef}
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1, type: 'spring' }}
+          className="bounty-poster mx-auto mb-6 md:mb-8 flex items-center justify-center"
+        >
+          <div className="relative">
+            <motion.div
+              className="flex items-center justify-center relative"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: 'spring', stiffness: 100, damping: 10 }}
+            >
+              <div
+                className={`w-[280px] h-[350px] sm:w-[320px] sm:h-[400px] md:w-[400px] md:h-[500px] lg:w-[450px] lg:h-[550px] morph-bubble overflow-hidden shadow-xl rounded-[40%/30%] transition-all duration-300 ${
+                  isGlitching ? 'glitch-box' : ''
+                }`}
+              >
+                <img
+                  src={imageSrc}
+                  alt={personalInfo.name}
+                  className="w-full h-full object-cover scale-105 transition-transform duration-700 ease-in-out"
+                  draggable={false}
+                />
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
 
+        {/* 🔡 Typewriter Text */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="mb-6 md:mb-8 px-4"
+        >
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-orbitron font-bold mb-4 leading-tight text-white">
+            {displayLines.map((line, i) => (
+              <span
+                key={i}
+                className={`block ${
+                  i === 1 ? 'text-[#ce4993]' : 'text-white'
+                } transition-all duration-300`}
+              >
+                {line}
+              </span>
+            ))}
+            {isTyping && <span className="text-[#eeaf61] animate-pulse">|</span>}
+          </h1>
 
-      <img
-        src={imageSrc}
-        alt={personalInfo.name}
-        className="w-full h-full object-cover scale-105 transition-transform duration-700 ease-in-out"
-        draggable={false}
-      />
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 font-vt323 max-w-2xl mx-auto">
+            {personalInfo.subtitle}
+          </p>
+        </motion.div>
+
+        {/* 🟢 CTA */}
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.8 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+          className="anime-button bg-gradient-to-r from-[#ee5d6c] to-[#6a0d83] text-white px-6 py-3 md:px-8 md:py-4 rounded-lg font-orbitron font-bold text-base md:text-lg hover:shadow-lg hover:shadow-[#ce4993]/50 transition-all duration-300"
+        >
+          Enter Digital World
+        </motion.button>
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
 
         </div>
       </motion.div>
