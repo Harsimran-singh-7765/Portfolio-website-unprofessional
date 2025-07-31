@@ -9,6 +9,12 @@
   font-style: normal;
 }
 
+body, html {
+  background-color: var(--bg-black);
+  color: var(--text-white);
+}
+
+
 /* Font Classes - Gothic Anime Style */
 .font-death-note {
   font-family: 'DeathNote', 'Nosifer', 'Creepster', cursive;
