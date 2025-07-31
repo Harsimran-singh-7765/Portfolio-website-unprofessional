@@ -9,36 +9,36 @@ import { personalInfo } from '../data/personal';
 
 
 const Hero: React.FC = () => {
-const [imageSrc, setImageSrc] = useState('/Owner.png');
+const [imageSrc, setImageSrc] = useState('/wolf.png');
 const [isGlitching, setIsGlitching] = useState(false);
 
-useEffect(() => {
-  const timer = setTimeout(() => {
-    setIsGlitching(true); // add glitch
-    setImageSrc('/goofy.png');
+// useEffect(() => {
+//   const timer = setTimeout(() => {
+//     setIsGlitching(true); // add glitch
+//     setImageSrc('/goofy.png');
 
-    const revertTimer = setTimeout(() => {
-      setImageSrc('/Owner.png');
+//     const revertTimer = setTimeout(() => {
+//       setImageSrc('/Owner.png');
 
-      const stopGlitch = setTimeout(() => {
-        setIsGlitching(false); // remove glitch
-      }, 400); // glitch duration
+//       const stopGlitch = setTimeout(() => {
+//         setIsGlitching(false); // remove glitch
+//       }, 400); // glitch duration
 
-      return () => clearTimeout(stopGlitch);
-    }, 1000); // show goofy for 1 second
+//       return () => clearTimeout(stopGlitch);
+//     }, 1000); // show goofy for 1 second
 
-    return () => clearTimeout(revertTimer);
-  }, 5000); // trigger after 5 seconds
+//     return () => clearTimeout(revertTimer);
+//   }, 5000); // trigger after 5 seconds
 
-  return () => clearTimeout(timer);
-}, []);
+//   return () => clearTimeout(timer);
+// }, []);
 
   const fullText = `${personalInfo.name}\n${personalInfo.title}`;
   const [displayLines, setDisplayLines] = useState<string[]>([]);
   const [isTyping, setIsTyping] = useState(true);
 
-  const sectionRef = useRef(null);    // 👈 Full section
-  const posterRef = useRef(null);     // 👈 Bounty Poster div
+  const sectionRef = useRef(null);    
+    const posterRef = useRef(null);     // 👈 Bounty Poster div
 
   // 🧠 Typewriter Effect
   useEffect(() => {
@@ -88,9 +88,9 @@ useEffect(() => {
       console.log("🎯 Mouse move", { x, y });
 
       gsap.to(poster, {
-        x: x * 20,
-        y: y * 20,
-        scale: 1.05,
+        x: x * 10,
+        y: y * 10,
+        scale: 1.01,
         duration: 0.5,
         ease: 'power2.out'
       });
@@ -159,35 +159,26 @@ useEffect(() => {
 
       {/* 🔵 Content */}
       <div className="relative z-10 text-center max-w-4xl mx-auto w-full">
-        {/* 🟠 Bounty Poster Frame */}
-        <motion.div
-          ref={posterRef}
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.5, type: 'spring', stiffness: 80, damping: 20 }}
-          className="bounty-poster mx-auto mb-6 md:mb-8 flex items-center justify-center"
-        >
-          <div className="relative">
-            <motion.div
-              className="flex items-center justify-center relative"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: 'spring', stiffness: 120, damping: 15 }}
-            >
-              <div
-                className={`w-[280px] h-[350px] sm:w-[320px] sm:h-[400px] md:w-[400px] md:h-[500px] lg:w-[450px] lg:h-[550px] morph-bubble overflow-hidden shadow-2xl rounded-[40%/30%] transition-all duration-500 ease-out ${
-                  isGlitching ? 'glitch-box' : ''
-                }`}
-              >
-                <img
-                  src={imageSrc}
-                  alt={personalInfo.name}
-                  className="w-full h-full object-cover scale-105 transition-all duration-700 ease-out"
-                  draggable={false}
-                />
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
+        {/* 🖼️ Image Container with Glitch Ring */}
+{/* 🖼️ Image Container with Subtle Glitch */}
+<motion.div
+  className="flex items-center justify-center relative z-10 mb-10"
+>
+  <div
+    ref={posterRef}
+    className="relative w-[280px] h-[250px] sm:w-[320px] sm:h-[400px] md:w-[400px] md:h-[500px] lg:w-[450px] lg:h-[350px] overflow-hidden rounded-[40%/30%] glitch-frame"
+  >
+    <img
+      src={imageSrc}
+      alt={personalInfo.name}
+      className="w-full h-full object-cover scale-105"
+      draggable={false}
+    />
+    <div className="absolute inset-0 w-full h-full bg-transparent glitch-overlay pointer-events-none"></div>
+  </div>
+</motion.div>
+
+
 
         {/* 🔡 Typewriter Text */}
         <motion.div

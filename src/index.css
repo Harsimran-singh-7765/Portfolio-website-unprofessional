@@ -8,6 +8,12 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'CyberGoth';
+  src: url('/fonts/CyberGoth.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 body, html {
   background-color: var(--bg-black);
@@ -24,10 +30,11 @@ body, html {
 
 
 .font-gothic {
-  font-family: 'Butcherman', 'Eater', cursive;
+  font-family: 'CyberGoth', sans-serif;
   font-weight: 400;
   letter-spacing: 0.02em;
 }
+
 
 .font-clean {
   font-family: 'Inter', sans-serif;
@@ -100,6 +107,83 @@ body, html {
   0% { transform: translate(0, 0); }
   100% { transform: translate(50px, 50px); }
 }
+
+
+.ring-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px; /* or whatever size you need */
+  background-color: transparent;
+}
+
+.ring-glitch {
+  width: 160px;
+  height: 160px;
+  border-radius: 9999px;
+  padding: 5px;
+  box-shadow:
+    0 0 8px #6a0d83,
+    0 0 12px #ce4993,
+    0 0 16px #fb9062,
+    0 0 22px #eeaf61;
+  animation: glitch-ring 3s infinite ease-in-out alternate;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #111; /* optional: gives inner contrast */
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  object-fit: cover;
+  border: 3px solid #000; /* optional inner border */
+}
+
+@keyframes glitch-ring {
+  0% {
+    transform: scale(1) rotate(0deg) translate(0, 0);
+    filter: hue-rotate(0deg);
+  }
+  20% {
+    transform: scale(1.02) rotate(2deg) translate(1px, -2px);
+    filter: hue-rotate(30deg);
+  }
+  40% {
+    transform: scale(0.98) rotate(-2deg) translate(-2px, 1px);
+    filter: hue-rotate(80deg);
+  }
+  60% {
+    transform: scale(1.03) rotate(1deg) translate(2px, -1px);
+    filter: hue-rotate(120deg);
+  }
+  80% {
+    transform: scale(0.99) rotate(-1deg) translate(-1px, 2px);
+    filter: hue-rotate(200deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg) translate(0, 0);
+    filter: hue-rotate(360deg);
+  }
+}
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin 10s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .ring-overlay {
+    box-shadow: 0 0 30px #ce49c7, 0 0 60px #6a0d83, 0 0 90px #fb9062;
+  }
+}
+
+
 
 /* === Gothic Buttons === */
 .btn-gothic {
@@ -224,7 +308,7 @@ body, html {
 }
 
 /* === Morphing Bubble === */
-.morph-bubble {
+/* .morph-bubble {
   animation: symbioteMorph 16s ease-in-out infinite;
   transition: all 0.8s ease;
   background: transparent;
@@ -259,7 +343,7 @@ body, html {
     transform: rotate(0deg) scale(1);
     border-color: var(--primary-green);
   }
-}
+} */
 
 /* === Responsive Design === */
 @media (max-width: 768px) {
