@@ -427,6 +427,7 @@ const Skills: React.FC = () => {
             {skillNodes.map((node, index) => {
               const categoryData = isMobile ? currentCategoryData[1] : skillCategories[node.category as keyof typeof skillCategories];
               const isHovered = hoveredSkill === node.id;
+              const skillData = categoryData.skills.find(s => s.name === node.name);
               
               return (
                 <g key={node.id}>
@@ -460,21 +461,44 @@ const Skills: React.FC = () => {
                     transform={`rotate(-90 ${node.x} ${node.y})`}
                   />
                   
-                  <text
-                    x={node.x}
-                    y={node.y + 5}
-                    textAnchor="middle"
-                    fill="white"
-                    fontSize={isMobile ? "9" : "7"}
-                    fontFamily="Inter"
-                    className="pointer-events-none"
-                  >
-                    {node.name.length > 8 ? node.name.substring(0, 6) + '..' : node.name}
-                  </text>
+                  {/* Skill Icon */}
+                  {skillData?.icon && (
+                    <foreignObject
+                      x={node.x - (isMobile ? 12 : 10)}
+                      y={node.y - (isMobile ? 12 : 10)}
+                      width={isMobile ? "24" : "20"}
+                      height={isMobile ? "24" : "20"}
+                      className="pointer-events-none"
+                    >
+                      <img
+                        src={skillData.icon}
+                        alt={node.name}
+                        className="w-full h-full object-contain filter brightness-110"
+                        style={{
+                          filter: isHovered ? 'brightness(1.3) drop-shadow(0 0 8px rgba(255,255,255,0.8))' : 'brightness(1.1)'
+                        }}
+                      />
+                    </foreignObject>
+                  )}
+                  
+                  {/* Fallback text if no icon */}
+                  {!skillData?.icon && (
+                    <text
+                      x={node.x}
+                      y={node.y + 5}
+                      textAnchor="middle"
+                      fill="white"
+                      fontSize={isMobile ? "9" : "7"}
+                      fontFamily="Inter"
+                      className="pointer-events-none"
+                    >
+                      {node.name.length > 8 ? node.name.substring(0, 6) + '..' : node.name}
+                    </text>
+                  )}
                   
                   <text
                     x={node.x}
-                    y={node.y - 8}
+                    y={node.y - (isMobile ? 18 : 15)}
                     textAnchor="middle"
                     fill={categoryData.color}
                     fontSize={isMobile ? "7" : "5"}
