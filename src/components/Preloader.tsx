@@ -83,19 +83,22 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   return (
     <div
       ref={preloaderRef}
-      className="fixed inset-0 z-50 bg-gradient-to-br from-black via-[#1a0d1a] to-[#0d0a1a] flex items-center justify-center overflow-hidden"
+
+  className="fixed inset-0 z-50 bg-gradient-to-br from-black via-[#0a0a0a] to-[#050505] matrix-bg flex items-center justify-center overflow-hidden"
+
+
     >
       {/* Animated Background with matching colors */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-[#6a0d83]/10 to-[#fb9062]/5">
+      <div className="absolute inset-0">
         <div className="absolute inset-0 opacity-20">
-          <div className="grid-background"></div>
+          <div className="matrix-grid"></div>
         </div>
       </div>
 
       {/* Floating Particles with city sunset palette */}
       <div ref={particlesRef} className="absolute inset-0 pointer-events-none">
         {[...Array(20)].map((_, i) => {
-          const colors = ['#fb9062', '#ee5d6c', '#ce4993', '#6a0d83', '#eeaf61'];
+          const colors = ['#00ff41', '#8b00ff', '#00cc33', '#6600cc'];
           const color = colors[i % colors.length];
           return (
             <div
@@ -119,10 +122,10 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           ref={welcomeRef}
           className="mb-8"
         >
-          <h1 className="text-4xl md:text-6xl lg:text-8xl font-orbitron font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#fb9062] via-[#ee5d6c] to-[#ce4993] mb-4 glow-orange">
-            WELCOME
+          <h1 className="text-4xl md:text-6xl lg:text-8xl font-death-note font-bold text-green-400 mb-4 glow-green">
+            INITIALIZING
           </h1>
-          <div className="w-32 h-1 bg-gradient-to-r from-[#fb9062] to-[#6a0d83] mx-auto rounded-full shadow-lg shadow-[#fb9062]/50"></div>
+          <div className="w-32 h-1 bg-green-400 mx-auto shadow-lg shadow-green-400/50"></div>
         </div>
 
         {/* Fire Text Effect with consistent colors */}
@@ -130,14 +133,14 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           ref={fireTextRef}
           className="relative"
         >
-          <div className="text-2xl md:text-4xl font-vt323 text-[#eeaf61] glow-sunset-gold">
-            TO THE DIGITAL REALM
+          <div className="text-2xl md:text-4xl font-gothic text-purple-400 glow-purple uppercase">
+            MATRIX PROTOCOL
           </div>
           
           {/* Fire particles with matching colors */}
           <div className="absolute inset-0 pointer-events-none">
             {[...Array(12)].map((_, i) => {
-              const colors = ['#fb9062', '#eeaf61', '#ee5d6c'];
+              const colors = ['#00ff41', '#8b00ff'];
               const color = colors[i % colors.length];
               return (
                 <div
@@ -158,11 +161,11 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
 
         {/* Loading indicator with matching theme */}
         <div className="mt-12">
-          <div className="w-64 h-2 bg-gray-900/50 rounded-full mx-auto overflow-hidden border border-[#6a0d83]/30">
-            <div className="h-full bg-gradient-to-r from-[#fb9062] to-[#6a0d83] rounded-full animate-pulse loading-bar shadow-lg shadow-[#fb9062]/30"></div>
+          <div className="w-64 h-2 bg-gray-900/50 mx-auto overflow-hidden border-2 border-green-400/30">
+            <div className="h-full bg-green-400 animate-pulse loading-bar shadow-lg shadow-green-400/30"></div>
           </div>
-          <p className="text-[#ce4993] font-vt323 mt-4 text-lg animate-pulse glow-rose">
-            Initializing Digital Matrix...
+          <p className="text-green-400 font-clean mt-4 text-lg animate-pulse glow-green uppercase font-bold">
+            LOADING DIGITAL MATRIX...
           </p>
         </div>
       </div>

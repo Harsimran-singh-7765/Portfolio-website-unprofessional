@@ -260,7 +260,7 @@ const Skills: React.FC = () => {
   const currentCategoryData = categories[currentCategory];
 
   return (
-    <section id="skills" className="py-20 bg-gradient-to-b from-black via-[#0a0a0a] to-[#1a0d1a] transition-all duration-1000">
+    <section id="skills" className="py-20 matrix-bg transition-all duration-1000">
       <div className="max-w-7xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -269,31 +269,31 @@ const Skills: React.FC = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-orbitron font-bold text-white mb-4">
-            Skill <span className="text-[#ce4993] glow-rose">Tree</span>
+          <h2 className="text-4xl md:text-5xl font-death-note font-bold text-white mb-4">
+            SKILL <span className="text-purple-400 glow-purple">MATRIX</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#ce4993] to-[#fb9062] mx-auto mb-4 rounded-full shadow-lg shadow-[#ce4993]/50"></div>
-          <p className="text-gray-300 font-vt323 text-lg">
+          <div className="w-24 h-1 bg-purple-400 mx-auto mb-4 shadow-lg shadow-purple-400/50"></div>
+          <p className="text-gray-300 font-clean text-lg">
             {isMobile ? 'Tap nodes to explore my expertise' : 'Hover over nodes to explore • Drag center nodes to rearrange'}
           </p>
         </motion.div>
 
         {/* Mobile Category Navigation */}
         {isMobile && (
-          <div className="flex items-center justify-between mb-6 bg-black/60 border border-purple-400 rounded-lg p-4">
+          <div className="flex items-center justify-between mb-6 card-gothic-purple p-4">
             <button
               onClick={() => setCurrentCategory(Math.max(0, currentCategory - 1))}
               disabled={currentCategory === 0}
-              className="p-2 bg-purple-500/20 border border-purple-500 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn-gothic-purple disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <ChevronLeft className="w-5 h-5 text-purple-400" />
             </button>
             
             <div className="text-center">
-              <h3 className="text-xl font-orbitron font-bold text-white">
+              <h3 className="text-xl font-gothic font-bold text-white uppercase">
                 {currentCategoryData[0]}
               </h3>
-              <p className="text-purple-400 font-vt323 text-sm">
+              <p className="text-purple-400 font-clean text-sm">
                 {currentCategory + 1} of {categories.length}
               </p>
             </div>
@@ -301,7 +301,7 @@ const Skills: React.FC = () => {
             <button
               onClick={() => setCurrentCategory(Math.min(categories.length - 1, currentCategory + 1))}
               disabled={currentCategory === categories.length - 1}
-              className="p-2 bg-purple-500/20 border border-purple-500 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn-gothic-purple disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <ChevronRight className="w-5 h-5 text-purple-400" />
             </button>
@@ -313,13 +313,13 @@ const Skills: React.FC = () => {
           <div className="flex justify-center mb-6">
             <button
               onClick={resetPositions}
-              className="px-4 py-2 bg-purple-500/20 border border-purple-500 rounded-lg text-purple-400 font-vt323 hover:bg-purple-500/30 transition-all duration-300"
+              className="btn-gothic-purple"
             >
-              Reset Layout
+              RESET MATRIX
             </button>
           </div>
         )}
-        <div className="relative bg-black/40 border border-purple-400 rounded-lg p-4 md:p-8 backdrop-blur-sm overflow-hidden">
+        <div className="relative card-gothic-green p-4 md:p-8 overflow-hidden">
           <svg
             ref={svgRef}
             width={isMobile ? "400" : "800"}
@@ -465,8 +465,8 @@ const Skills: React.FC = () => {
                     y={node.y + 5}
                     textAnchor="middle"
                     fill="white"
-                    fontSize={isMobile ? "10" : "8"}
-                    fontFamily="VT323"
+                    fontSize={isMobile ? "9" : "7"}
+                    fontFamily="Inter"
                     className="pointer-events-none"
                   >
                     {node.name.length > 8 ? node.name.substring(0, 6) + '..' : node.name}
@@ -477,8 +477,9 @@ const Skills: React.FC = () => {
                     y={node.y - 8}
                     textAnchor="middle"
                     fill={categoryData.color}
-                    fontSize={isMobile ? "8" : "6"}
-                    fontFamily="Press Start 2P"
+                    fontSize={isMobile ? "7" : "5"}
+                    fontFamily="Inter"
+                    fontWeight="bold"
                     className="pointer-events-none"
                   >
                     {node.level}%
@@ -494,7 +495,7 @@ const Skills: React.FC = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              className="absolute bottom-4 left-4 bg-black/90 border border-cyan-400 rounded-lg p-4 backdrop-blur-sm max-w-xs z-10"
+              className="absolute bottom-4 left-4 card-gothic-green p-4 max-w-xs z-10"
             >
               {(() => {
                 const skill = skillNodes.find(s => s.id === hoveredSkill);
@@ -502,11 +503,11 @@ const Skills: React.FC = () => {
                 
                 return (
                   <>
-                    <h4 className="text-cyan-400 font-orbitron font-bold mb-2">{skill.name}</h4>
-                    <p className="text-white font-vt323 text-sm mb-2">{skill.description}</p>
+                    <h4 className="text-green-400 font-gothic font-bold mb-2 uppercase">{skill.name}</h4>
+                    <p className="text-white font-clean text-sm mb-2">{skill.description}</p>
                     <div className="flex justify-between items-center">
-                      <span className="text-purple-400 font-pixel text-xs">{skill.experience}</span>
-                      <span className="text-green-400 font-pixel text-xs">{skill.level}% Mastery</span>
+                      <span className="text-purple-400 font-clean text-xs">{skill.experience}</span>
+                      <span className="text-green-400 font-clean text-xs font-bold">{skill.level}% MASTERY</span>
                     </div>
                   </>
                 );
@@ -523,7 +524,7 @@ const Skills: React.FC = () => {
                 className="w-4 h-4 rounded-full border-2"
                 style={{ borderColor: data.color, backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
               />
-              <span className="text-gray-300 font-vt323 text-xs md:text-sm">{category}</span>
+              <span className="text-gray-300 font-clean text-xs md:text-sm">{category}</span>
             </div>
           ))}
         </div>

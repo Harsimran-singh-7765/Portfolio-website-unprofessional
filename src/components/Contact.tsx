@@ -27,11 +27,11 @@ const Contact: React.FC = () => {
 
   return (
 
-<section id="contact" className="py-20 bg-gradient-to-b from-black via-[#0a0a0a] to-[#1a0d1a] relative overflow-hidden transition-all duration-1000">
+<section id="contact" className="py-20 matrix-bg relative overflow-hidden transition-all duration-1000">
   {/* BACKGROUND ORBS */}
   <div className="absolute inset-0 opacity-10">
-    <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#ce4993] rounded-full blur-3xl"></div>
-    <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[#fb9062] rounded-full blur-3xl"></div>
+    <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-400 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-green-400 rounded-full blur-3xl"></div>
   </div>
 
   <div className="max-w-6xl mx-auto px-4 relative z-10">
@@ -42,11 +42,11 @@ const Contact: React.FC = () => {
       viewport={{ once: true }}
       className="text-center mb-16"
     >
-      <h2 className="text-4xl md:text-5xl font-orbitron font-bold text-white mb-4">
-        Summon <span className="text-[#ee5d6c] glow-coral">Scroll</span>
+      <h2 className="text-4xl md:text-5xl font-death-note font-bold text-white mb-4">
+        CONTACT <span className="text-green-400 glow-green">PROTOCOL</span>
       </h2>
-      <div className="w-24 h-1 bg-gradient-to-r from-[#fb9062] to-[#6a0d83] mx-auto mb-4"></div>
-      <p className="text-gray-300 font-vt323 text-lg">Ready to start your next digital quest?</p>
+      <div className="w-24 h-1 bg-green-400 mx-auto mb-4 shadow-lg shadow-green-400/50"></div>
+      <p className="text-gray-300 font-clean text-lg">READY TO START YOUR NEXT DIGITAL QUEST?</p>
     </motion.div>
 
     <div className="grid lg:grid-cols-2 gap-12">
@@ -56,45 +56,45 @@ const Contact: React.FC = () => {
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="contact-form bg-black/40 border border-[#ee5d6c] rounded-lg p-4 md:p-8 backdrop-blur-sm"
+        className="card-gothic-green p-4 md:p-8"
       >
         <div className="mb-6">
-          <h3 className="text-xl md:text-2xl font-orbitron font-bold text-white mb-2">Send Message</h3>
-          <div className="w-16 h-1 bg-[#ee5d6c]"></div>
+          <h3 className="text-xl md:text-2xl font-gothic font-bold text-white mb-2 uppercase">SEND MESSAGE</h3>
+          <div className="w-16 h-1 bg-green-400"></div>
         </div>
 
         <form action="https://formsubmit.co/Harsimransingh7765@gmail.com" method="POST" className="space-y-6">
           {/* hidden inputs unchanged... */}
 
           <div>
-            <label className="block text-[#fb9062] font-vt323 text-base md:text-lg mb-2">Name</label>
+            <label className="block text-green-400 font-clean text-base md:text-lg mb-2 font-bold uppercase">Name</label>
             <input
               type="text"
               name="name"
               required
-              className="w-full bg-black/60 border border-gray-600 rounded-lg px-4 py-3 text-white font-vt323 focus:border-[#fb9062] focus:outline-none focus:ring-2 focus:ring-[#fb9062]/50 transition-all duration-300"
+              className="w-full bg-black border-2 border-gray-600 px-4 py-3 text-white font-clean focus:border-green-400 focus:outline-none transition-all duration-300"
               placeholder="Enter your name..."
             />
           </div>
 
           <div>
-            <label className="block text-[#fb9062] font-vt323 text-base md:text-lg mb-2">Email</label>
+            <label className="block text-green-400 font-clean text-base md:text-lg mb-2 font-bold uppercase">Email</label>
             <input
               type="email"
               name="email"
               required
-              className="w-full bg-black/60 border border-gray-600 rounded-lg px-4 py-3 text-white font-vt323 focus:border-[#fb9062] focus:outline-none focus:ring-2 focus:ring-[#fb9062]/50 transition-all duration-300"
+              className="w-full bg-black border-2 border-gray-600 px-4 py-3 text-white font-clean focus:border-green-400 focus:outline-none transition-all duration-300"
               placeholder="Enter your email..."
             />
           </div>
 
           <div>
-            <label className="block text-[#fb9062] font-vt323 text-base md:text-lg mb-2">Message</label>
+            <label className="block text-green-400 font-clean text-base md:text-lg mb-2 font-bold uppercase">Message</label>
             <textarea
               name="message"
               required
               rows={6}
-              className="w-full bg-black/60 border border-gray-600 rounded-lg px-4 py-3 text-white font-vt323 focus:border-[#fb9062] focus:outline-none focus:ring-2 focus:ring-[#fb9062]/50 transition-all duration-300 resize-none"
+              className="w-full bg-black border-2 border-gray-600 px-4 py-3 text-white font-clean focus:border-green-400 focus:outline-none transition-all duration-300 resize-none"
               placeholder="Tell me about your project..."
             />
           </div>
@@ -103,10 +103,10 @@ const Contact: React.FC = () => {
             type="submit"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="w-full bg-gradient-to-r from-[#fb9062] to-[#6a0d83] text-white py-3 md:py-4 rounded-lg font-orbitron font-bold text-base md:text-lg flex items-center justify-center space-x-2 hover:shadow-lg hover:shadow-[#fb9062]/50 transition-all duration-300"
+            className="w-full btn-gothic-green py-3 md:py-4 text-base md:text-lg flex items-center justify-center space-x-2"
           >
             <Send size={20} />
-            <span>Cast Spell</span>
+            <span>TRANSMIT DATA</span>
           </motion.button>
         </form>
       </motion.div>
@@ -120,9 +120,9 @@ const Contact: React.FC = () => {
         className="space-y-8"
       >
         <div className="mb-8">
-          <h3 className="text-xl md:text-2xl font-orbitron font-bold text-white mb-4">Contact Info</h3>
-          <p className="text-gray-300 font-vt323 text-base md:text-lg leading-relaxed">
-            Ready to embark on a digital adventure? Let's connect and build something amazing together.
+          <h3 className="text-xl md:text-2xl font-gothic font-bold text-white mb-4 uppercase">CONTACT INFO</h3>
+          <p className="text-gray-300 font-clean text-base md:text-lg leading-relaxed">
+            READY TO EMBARK ON A DIGITAL ADVENTURE? LET'S CONNECT AND BUILD SOMETHING AMAZING TOGETHER.
           </p>
         </div>
 
@@ -136,14 +136,20 @@ const Contact: React.FC = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
-              className="flex items-center space-x-3 md:space-x-4 p-3 md:p-4 bg-black/40 border border-gray-700 rounded-lg hover:border-[#ce4993] transition-all duration-300 group"
+              className={`flex items-center space-x-3 md:space-x-4 p-3 md:p-4 transition-all duration-300 group ${
+                index % 2 === 0 ? 'card-gothic-green' : 'card-gothic-purple'
+              }`}
             >
-              <div className="w-12 h-12 bg-gradient-to-br from-[#ce4993] to-[#fb9062] rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <div className={`w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 ${
+                index % 2 === 0 ? 'bg-green-400' : 'bg-purple-400'
+              }`}>
                 <info.icon className="w-6 h-6 text-white" />
               </div>
               <div>
-                <div className="text-[#ce4993] font-vt323 text-sm">{info.label}</div>
-                <div className="text-white font-orbitron text-sm md:text-base">{info.value}</div>
+                <div className={`font-clean text-sm font-bold uppercase ${
+                  index % 2 === 0 ? 'text-green-400' : 'text-purple-400'
+                }`}>{info.label}</div>
+                <div className="text-white font-clean text-sm md:text-base">{info.value}</div>
               </div>
             </motion.a>
           ))}
@@ -151,14 +157,14 @@ const Contact: React.FC = () => {
 
         {/* 🌐 SOCIAL LINKS */}
         <div className="pt-8">
-          <h4 className="text-lg md:text-xl font-orbitron font-bold text-white mb-4">Connect</h4>
+          <h4 className="text-lg md:text-xl font-gothic font-bold text-white mb-4 uppercase">CONNECT</h4>
           <div className="flex space-x-4">
             <motion.a
               href="https://github.com/Harsimran-singh-7765"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1, rotate: 3 }}
-              className="w-12 h-12 bg-black/70 border border-[#ce4993] rounded-lg flex items-center justify-center text-white hover:bg-[#ce4993]/80 transition-all duration-300"
+              className="w-12 h-12 bg-black border-2 border-green-400 flex items-center justify-center text-white hover:bg-green-400 hover:text-black transition-all duration-300"
             >
               <Github className="w-6 h-6" />
             </motion.a>
@@ -168,7 +174,7 @@ const Contact: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1, rotate: 3 }}
-              className="w-12 h-12 bg-black/70 border border-[#6a0d83] rounded-lg flex items-center justify-center text-white hover:bg-[#6a0d83]/80 transition-all duration-300"
+              className="w-12 h-12 bg-black border-2 border-purple-400 flex items-center justify-center text-white hover:bg-purple-400 hover:text-black transition-all duration-300"
             >
               <Linkedin className="w-6 h-6" />
             </motion.a>

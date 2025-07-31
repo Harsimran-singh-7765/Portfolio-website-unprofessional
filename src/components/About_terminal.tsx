@@ -199,6 +199,7 @@ useEffect(() => {
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
       className="relative bg-gradient-to-br from-[#0a0f0d] via-[#0f0c29] to-[#1a1a2e] border border-green-400 rounded-lg p-4 md:p-6 backdrop-blur-md shadow-[0_0_30px_#00ff8877] font-vt323 text-green-300 before:content-[''] before:absolute before:inset-0 before:bg-[radial-gradient(#00ff8822_1px,transparent_1px)] before:bg-[length:4px_4px] before:opacity-10 before:pointer-events-none"
+      className="terminal-panel p-4 md:p-6 font-clean text-green-300 before:content-[''] before:absolute before:inset-0 before:bg-[radial-gradient(#00ff4122_1px,transparent_1px)] before:bg-[length:4px_4px] before:opacity-10 before:pointer-events-none"
     >
       {/* Header */}
       <div className="flex items-center mb-4">
@@ -207,8 +208,8 @@ useEffect(() => {
           <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
           <div className="w-3 h-3 bg-green-500 rounded-full"></div>
         </div>
-        <span className="ml-4 text-cyan-300 text-sm glitch-text">
-          harsimran@neofetch
+        <span className="ml-4 text-green-400 text-sm font-bold uppercase glow-green">
+          HARSIMRAN@MATRIX
         </span>
       </div>
 
@@ -226,7 +227,7 @@ useEffect(() => {
         <div className="text-green-300 text-sm md:text-base space-y-2 w-full">
           {lines.map((line, index) => (
             <p key={index}>
-              <span className="text-purple-300">{line.label} </span>
+              <span className="text-purple-400 font-bold uppercase">{line.label} </span>
               <span className={line.className}>
                 {typedLines[index]}
                 {index === currentLineIndex && '█'}

@@ -41,11 +41,11 @@ const Navigation: React.FC = () => {
   ];
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-sm border-b border-[#eeaf61]/30">
+    <nav className="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-sm border-b-2 border-green-400/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <span className="text-xl font-bold text-[#6a0d83] font-orbitron">
+            <span className="text-xl font-bold text-green-400 font-death-note glow-green">
               {personalInfo.name}
             </span>
           </div>
@@ -56,10 +56,10 @@ const Navigation: React.FC = () => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`px-3 py-2 text-sm font-medium transition-all duration-300 font-vt323 ${
+                  className={`px-3 py-2 text-sm font-medium transition-all duration-300 font-clean uppercase ${
                     activeSection === item.id
-                      ? 'text-[#ee5d6c] border-b-2 border-[#ee5d6c] glow-red'
-                      : 'text-gray-300 hover:text-[#ce4993] hover:glow-pink'
+                      ? 'text-green-400 border-b-2 border-green-400 glow-green'
+                      : 'text-gray-300 hover:text-purple-400 hover:glow-purple'
                   }`}
                 >
                   {item.label}
@@ -71,7 +71,7 @@ const Navigation: React.FC = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-[#fb9062] transition-colors"
+              className="text-gray-300 hover:text-green-400 transition-colors"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -80,16 +80,16 @@ const Navigation: React.FC = () => {
       </div>
 
       {isOpen && (
-        <div className="md:hidden bg-black/95 backdrop-blur-sm">
-          <div className="px-2 pt-2 pb-3 space-y-1 border-t border-[#eeaf61]/30">
+        <div className="md:hidden bg-black/95 backdrop-blur-sm border-t-2 border-green-400/50">
+          <div className="px-2 pt-2 pb-3 space-y-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`block px-3 py-2 text-base font-medium w-full text-left transition-all duration-300 font-vt323 ${
+                className={`block px-3 py-2 text-base font-medium w-full text-left transition-all duration-300 font-clean uppercase ${
                   activeSection === item.id
-                    ? 'text-[#ee5d6c] glow-red'
-                    : 'text-gray-300 hover:text-[#ce4993] hover:glow-pink'
+                    ? 'text-green-400 glow-green'
+                    : 'text-gray-300 hover:text-purple-400 hover:glow-purple'
                 }`}
               >
                 {item.label}

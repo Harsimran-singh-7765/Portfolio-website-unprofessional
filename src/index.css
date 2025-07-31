@@ -2,355 +2,274 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=VT323&family=Press+Start+2P&display=swap');
-
-/* Font Classes */
-.font-orbitron {
-  font-family: 'Orbitron', monospace;
+@font-face {
+  font-family: 'DeathNote';
+  src: url('/fonts/DeathNote.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-.font-vt323 {
-  font-family: 'VT323', monospace;
+/* Font Classes - Gothic Anime Style */
+.font-death-note {
+  font-family: 'DeathNote', 'Nosifer', 'Creepster', cursive;
+  font-weight: normal;
+  letter-spacing: 0.05em;
 }
 
-.font-pixel {
-  font-family: 'Press Start 2P', cursive;
+
+.font-gothic {
+  font-family: 'Butcherman', 'Eater', cursive;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 
-/* === Custom Scrollbar (Updated with City Sunset) === */
+.font-clean {
+  font-family: 'Inter', sans-serif;
+}
+
+/* === Color Palette === */
+:root {
+  --primary-green: #00ff41;
+  --secondary-green: #00cc33;
+  --dark-green: #008f11;
+  --primary-purple: #8b00ff;
+  --secondary-purple: #6600cc;
+  --dark-purple: #4d0099;
+  --bg-black: #000000;
+  --bg-dark: #0a0a0a;
+  --text-white: #ffffff;
+  --text-gray: #cccccc;
+  --border-green: #00ff4150;
+  --border-purple: #8b00ff50;
+}
+
+/* === Custom Scrollbar === */
 ::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--bg-black);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: transparent;
+  background: linear-gradient(180deg, var(--primary-green), var(--primary-purple));
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: transparent;
+  background: linear-gradient(180deg, var(--secondary-green), var(--secondary-purple));
 }
 
-/* Hide scrollbar for Firefox */
-html {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-/* Ensure smooth scrolling */
-* {
-  scroll-behavior: smooth;
-}
-
-/* === Glow Effects (Updated with City Sunset Palette) === */
-.glow-sunset-gold {
-  text-shadow: 0 0 10px #eeaf61, 0 0 20px #eeaf61;
-}
-
-.glow-orange {
-  text-shadow: 0 0 10px #fb9062, 0 0 20px #fb9062;
-}
-
-.glow-coral {
-  text-shadow: 0 0 10px #ee5d6c, 0 0 20px #ee5d6c;
-}
-
-.glow-rose {
-  text-shadow: 0 0 10px #ce4993, 0 0 20px #ce4993;
+/* === Glow Effects === */
+.glow-green {
+  text-shadow: 0 0 10px var(--primary-green), 0 0 20px var(--primary-green), 0 0 30px var(--primary-green);
 }
 
 .glow-purple {
-  text-shadow: 0 0 10px #6a0d83, 0 0 20px #6a0d83;
+  text-shadow: 0 0 10px var(--primary-purple), 0 0 20px var(--primary-purple), 0 0 30px var(--primary-purple);
 }
 
-/* Legacy Glow (if still used) */
-.glow-red {
-  text-shadow: 0 0 10px #e63946, 0 0 20px #e63946, 0 0 30px #e63946;
+.glow-white {
+  text-shadow: 0 0 10px var(--text-white), 0 0 20px var(--text-white);
 }
 
-.glow-cyan {
-  text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+/* === Matrix Background === */
+.matrix-bg {
+  background: 
+    radial-gradient(circle at 25% 25%, var(--primary-green)10 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, var(--primary-purple)10 0%, transparent 50%),
+    linear-gradient(135deg, var(--bg-black) 0%, var(--bg-dark) 100%);
 }
 
-/* Background Grid Animation */
-.grid-background {
+.matrix-grid {
   background-image: 
-    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+    linear-gradient(rgba(0, 255, 65, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 0, 255, 0.1) 1px, transparent 1px);
   background-size: 50px 50px;
-  animation: grid-move 20s linear infinite;
+  animation: matrix-scroll 20s linear infinite;
 }
 
-@keyframes grid-move {
+@keyframes matrix-scroll {
   0% { transform: translate(0, 0); }
   100% { transform: translate(50px, 50px); }
+}
+
+/* === Gothic Buttons === */
+.btn-gothic {
+  @apply relative px-6 py-3 bg-black border-2 text-white font-gothic uppercase tracking-wider transition-all duration-300;
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    font-family: 'DeathNote', 'UnifrakturCook', 'Creepster', cursive;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.btn-gothic-green {
+  @apply btn-gothic border-green-400 text-green-400;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+}
+
+.btn-gothic-green:hover {
+  @apply bg-green-400 text-black;
+  box-shadow: 0 0 30px rgba(0, 255, 65, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-gothic-purple {
+  @apply btn-gothic border-purple-400 text-purple-400;
+  box-shadow: 0 0 20px rgba(139, 0, 255, 0.3);
+}
+
+.btn-gothic-purple:hover {
+  @apply bg-purple-400 text-black;
+  box-shadow: 0 0 30px rgba(139, 0, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+/* === Gothic Cards === */
+.card-gothic {
+  @apply bg-black border-2 backdrop-blur-sm transition-all duration-300;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+    font-family: 'DeathNote', 'UnifrakturCook', 'Creepster', cursive;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.card-gothic-green {
+  @apply card-gothic border-green-400;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+}
+
+.card-gothic-green:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 65, 0.4);
+  transform: translateY(-5px);
+}
+
+.card-gothic-purple {
+  @apply card-gothic border-purple-400;
+  box-shadow: 0 0 20px rgba(139, 0, 255, 0.2);
+}
+
+.card-gothic-purple:hover {
+  box-shadow: 0 0 30px rgba(139, 0, 255, 0.4);
+  transform: translateY(-5px);
+}
+
+/* === Glitch Effects === */
+.glitch-text {
+  position: relative;
+  color: var(--primary-green);
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+}
+
+.glitch-text::before {
+  animation: glitchTop 2s infinite linear alternate-reverse;
+  color: var(--primary-purple);
+}
+
+.glitch-text::after {
+  animation: glitchBottom 2s infinite linear alternate-reverse;
+  color: var(--text-white);
+}
+
+@keyframes glitchTop {
+  0% {
+    clip: rect(0, 9999px, 0, 0);
+  }
+  50% {
+    clip: rect(0, 9999px, 20px, 0);
+    transform: translateX(-2px);
+  }
+  100% {
+    clip: rect(0, 9999px, 0, 0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes glitchBottom {
+  0% {
+    clip: rect(0, 9999px, 0, 0);
+  }
+  50% {
+    clip: rect(20px, 9999px, 9999px, 0);
+    transform: translateX(2px);
+  }
+  100% {
+    clip: rect(0, 9999px, 0, 0);
+    transform: translateX(0);
+  }
+}
+
+/* === Terminal Effects === */
+.terminal-panel {
+  @apply bg-black border-2 border-green-400 font-clean;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 65, 0.3),
+    inset 0 0 20px rgba(0, 255, 65, 0.1);
+}
+
+/* === Morphing Bubble === */
+.morph-bubble {
+  animation: symbioteMorph 16s ease-in-out infinite;
+  transition: all 0.8s ease;
+  background: transparent;
+  border: 3px solid var(--primary-green);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 30px rgba(0, 255, 65, 0.4);
 }
 
 @keyframes symbioteMorph {
   0% {
     border-radius: 56% 44% 47% 53% / 63% 34% 66% 37%;
     transform: rotate(0deg) scale(1);
+    border-color: var(--primary-green);
   }
   25% {
     border-radius: 68% 32% 59% 41% / 42% 58% 36% 64%;
     transform: rotate(0.3deg) scale(1.01);
+    border-color: var(--primary-purple);
   }
   50% {
     border-radius: 35% 65% 52% 48% / 60% 35% 70% 30%;
     transform: rotate(-0.5deg) scale(1.008);
+    border-color: var(--primary-green);
   }
   75% {
     border-radius: 62% 38% 39% 61% / 50% 48% 67% 33%;
     transform: rotate(0.4deg) scale(1.01);
+    border-color: var(--primary-purple);
   }
   100% {
     border-radius: 56% 44% 47% 53% / 63% 34% 66% 37%;
     transform: rotate(0deg) scale(1);
+    border-color: var(--primary-green);
   }
 }
 
-
-
-@keyframes glitch {
-  0% {
-    clip-path: inset(80% 0 0 0);
-    transform: translate(-2px, -2px);
-  }
-  20% {
-    clip-path: inset(0 0 80% 0);
-    transform: translate(2px, 2px);
-  }
-  40% {
-    clip-path: inset(20% 0 60% 0);
-    transform: translate(-2px, 2px);
-  }
-  60% {
-    clip-path: inset(40% 0 40% 0);
-    transform: translate(2px, -2px);
-  }
-  80% {
-    clip-path: inset(60% 0 20% 0);
-    transform: translate(-1px, 1px);
-  }
-  100% {
-    clip-path: inset(0 0 0 0);
-    transform: translate(0, 0);
-  }
-}
-
-.glitch-effect {
-  animation: glitch 0.4s ease-in-out;
-  filter: brightness(1.3) contrast(1.4);
-  box-shadow: 0 0 10px #f0f, 0 0 20px #0ff, 0 0 40px #f0f;
-}
-
-
-
-.morph-bubble {
-  animation: symbioteMorph 16s ease-in-out infinite;
-  transition: all 0.8s ease;
-  background: transparent;
-  border: 2px solid #eeff02aa;
-  backdrop-filter: blur(8px);
-  
-}
-
-
-.bounty-poster {
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
-.bounty-poster:hover {
-  filter: drop-shadow(0 0 30px rgba(9, 68, 231, 0.8));
-  transform: scale(1.02);
-  transition: all 0.3s ease;
-}
-
-/* Anime Button */
-.anime-button {
-  position: relative;
-  overflow: hidden;
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
-
-.anime-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.5s;
-}
-
-.anime-button:hover::before {
-  left: 100%;
-}
-
-/* Terminal Panel */
-.terminal-panel {
-  font-family: 'VT323', monospace;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9));
-  box-shadow: 
-    0 0 20px rgba(0, 255, 0, 0.3),
-    inset 0 0 20px rgba(0, 255, 0, 0.1);
-}
-
-/* Stat Cards */
-.stat-card {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(30, 30, 30, 0.6));
-  transition: all 0.3s ease;
-}
-
-.stat-card:hover {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(40, 40, 40, 0.8));
-  transform: translateY(-5px);
-}
-
-/* Skill Category */
-.skill-category {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(20, 20, 20, 0.6));
-  transition: all 0.3s ease;
-}
-
-.skill-category:hover {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(30, 30, 30, 0.8));
-  transform: translateY(-5px);
-}
-
-/* Project Cards */
-.project-card {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(20, 20, 20, 0.7));
-  transition: all 0.5s ease;
-  overflow: hidden;
-  position: relative;
-}
-
-.project-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.1), transparent);
-  transition: left 0.7s;
-  z-index: 1;
-}
-
-.project-card:hover::before {
-  left: 100%;
-}
-
-/* Contact Form */
-.contact-form {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(30, 30, 30, 0.8));
-  box-shadow: 
-    0 0 30px rgba(230, 57, 70, 0.3),
-    inset 0 0 30px rgba(230, 57, 70, 0.1);
-}
-
-/* Smooth Scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Custom Animations */
-@keyframes pulse-glow {
-  0%, 100% { 
-    box-shadow: 0 0 5px rgba(56, 189, 248, 0.5);
-  }
-  50% { 
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.8);
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-/* Hover Effects for Icons */
-.icon-hover {
-  transition: all 0.3s ease;
-}
-
-.icon-hover:hover {
-  transform: scale(1.2) rotate(5deg);
-  filter: drop-shadow(0 0 10px currentColor);
-}
-
-/* ======================= */
-/* Responsive Design */
-/* ======================= */
+/* === Responsive Design === */
 @media (max-width: 768px) {
-  .bounty-poster {
-    max-width: 280px;
+  .btn-gothic {
+    @apply px-4 py-2 text-sm;
   }
   
-  .font-pixel {
-    font-size: 0.5rem;
-  }
-  
-  .font-vt323 {
-    font-size: 0.9rem;
-  }
-  
-  .font-orbitron {
-    font-size: 0.9rem;
-  }
-
-  .skill-category {
-    padding: 1rem;
-  }
-
-  .mobile-nav-item {
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-  }
-
-  input, textarea {
-    font-size: 16px;
+  .card-gothic {
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
   }
 }
 
-@media (max-width: 480px) {
-  .bounty-poster {
-    max-width: 240px;
-  }
-  
-  .font-pixel {
-    font-size: 0.4rem;
-  }
-  
-  .font-vt323 {
-    font-size: 0.8rem;
-  }
-  
-  .font-orbitron {
-    font-size: 0.8rem;
-  }
-
-  .stat-card {
-    padding: 0.75rem;
-  }
-
-  .project-card {
-    margin-bottom: 1rem;
-  }
-}
-
-/* Loading Spinner */
+/* === Loading Spinner === */
 .loading-spinner {
   border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top: 2px solid #fff;
+  border-top: 2px solid var(--primary-green);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -358,4 +277,24 @@ html {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+/* Tailwind-safe custom */
+.bg-dark-vignette {
+  background: radial-gradient(circle at center, #0f0f0f 0%, #000 100%);
+}
+
+/* === Smooth Scrolling === */
+html {
+  scroll-behavior: smooth;
+}
+
+/* === Selection Colors === */
+::selection {
+  background: var(--primary-green);
+  color: var(--bg-black);
+}
+
+::-moz-selection {
+  background: var(--primary-green);
+  color: var(--bg-black);
 }

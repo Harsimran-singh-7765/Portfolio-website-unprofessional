@@ -18,7 +18,7 @@ const Projects: React.FC = () => {
   const visibleProjects = showAll ? projects : projects.slice(0, 4);
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-b from-[#1a0d1a] via-[#0a0a0a] to-black transition-all duration-1000">
+    <section id="projects" className="py-20 matrix-bg transition-all duration-1000">
       <div className="max-w-7xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -27,11 +27,11 @@ const Projects: React.FC = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-orbitron font-bold text-white mb-4">
-            Mission <span className="text-[#fb9062] glow-orange">Logs</span>
+          <h2 className="text-4xl md:text-5xl font-death-note font-bold text-white mb-4">
+            MISSION <span className="text-green-400 glow-green">LOGS</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#fb9062] to-[#6a0d83] mx-auto mb-4 rounded-full shadow-lg shadow-[#fb9062]/50"></div>
-          <p className="text-gray-300 font-vt323 text-lg">Completed quests and ongoing adventures</p>
+          <div className="w-24 h-1 bg-green-400 mx-auto mb-4 shadow-lg shadow-green-400/50"></div>
+          <p className="text-gray-300 font-clean text-lg">COMPLETED QUESTS AND ONGOING ADVENTURES</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6 md:gap-8">
@@ -43,7 +43,9 @@ const Projects: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 80 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="project-card bg-black/60 border border-gray-700 rounded-lg overflow-hidden backdrop-blur-sm hover:border-cyan-400 transition-all duration-500 group"
+                className={`overflow-hidden transition-all duration-500 group ${
+                  index % 2 === 0 ? 'card-gothic-green' : 'card-gothic-purple'
+                }`}
               >
                 <div className="relative overflow-hidden h-40 md:h-48">
                   <img
@@ -72,13 +74,17 @@ const Projects: React.FC = () => {
 
                 <div className="p-4 md:p-6">
                   <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-lg md:text-xl font-orbitron font-bold text-white group-hover:text-cyan-400 transition-colors">
+                    <h3 className={`text-lg md:text-xl font-gothic font-bold text-white transition-colors uppercase ${
+                      index % 2 === 0 ? 'group-hover:text-green-400' : 'group-hover:text-purple-400'
+                    }`}>
                       {project.title}
                     </h3>
-                    <span className="text-purple-400 font-pixel text-xs">{project.role}</span>
+                    <span className={`font-clean text-xs ${
+                      index % 2 === 0 ? 'text-green-400' : 'text-purple-400'
+                    }`}>{project.role}</span>
                   </div>
 
-                  <p className="text-gray-300 font-vt323 text-xs md:text-sm mb-4 leading-relaxed">
+                  <p className="text-gray-300 font-clean text-xs md:text-sm mb-4 leading-relaxed">
                     {project.description}
                   </p>
 
@@ -86,7 +92,11 @@ const Projects: React.FC = () => {
                     {project.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-1 bg-purple-500/20 border border-purple-500/50 rounded text-purple-300 font-pixel text-xs"
+                        className={`px-2 py-1 border text-xs font-clean ${
+                          index % 2 === 0 
+                            ? 'bg-green-400/20 border-green-400/50 text-green-300' 
+                            : 'bg-purple-400/20 border-purple-400/50 text-purple-300'
+                        }`}
                       >
                         {tech}
                       </span>
@@ -98,20 +108,20 @@ const Projects: React.FC = () => {
                       href={project.demoUrl}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex items-center space-x-1 md:space-x-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-3 md:px-4 py-2 rounded-lg font-vt323 text-xs md:text-sm hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300"
+                      className="flex items-center space-x-1 md:space-x-2 btn-gothic-purple text-xs md:text-sm"
                     >
                       <ExternalLink size={14} />
-                      <span>Demo</span>
+                      <span>DEMO</span>
                     </motion.a>
 
                     <motion.a
                       href={project.githubUrl}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex items-center space-x-1 md:space-x-2 bg-gray-700 text-white px-3 md:px-4 py-2 rounded-lg font-vt323 text-xs md:text-sm hover:bg-gray-600 transition-all duration-300"
+                      className="flex items-center space-x-1 md:space-x-2 btn-gothic-green text-xs md:text-sm"
                     >
                       <Github size={14} />
-                      <span>Code</span>
+                      <span>CODE</span>
                     </motion.a>
                   </div>
                 </div>
@@ -129,19 +139,11 @@ const Projects: React.FC = () => {
           >
             <motion.button
               onClick={() => setShowAll(!showAll)}
-              className="relative px-8 py-3 text-white font-bold text-lg font-orbitron group"
+              className="btn-gothic-green text-lg"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span className="relative z-10">{showAll ? 'View Less Logs 🔒' : 'View More Logs 🔥'}</span>
-              <motion.div
-                layoutId="fire-bar"
-                className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-red-500 via-yellow-400 to-orange-500 rounded-full blur-sm group-hover:blur-md animate-pulse"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.6 }}
-                style={{ transformOrigin: 'left' }}
-              ></motion.div>
+              {showAll ? 'HIDE CLASSIFIED LOGS' : 'SHOW ALL MISSIONS'}
             </motion.button>
           </motion.div>
         )}
