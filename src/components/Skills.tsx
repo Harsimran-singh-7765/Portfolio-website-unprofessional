@@ -260,19 +260,19 @@ const Skills: React.FC = () => {
   const currentCategoryData = categories[currentCategory];
 
   return (
-    <section id="skills" className="py-20 bg-gradient-to-b from-gray-900 to-black">
+    <section id="skills" className="py-20 bg-gradient-to-b from-black via-[#0a0a0a] to-[#1a0d1a] transition-all duration-1000">
       <div className="max-w-7xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1, ease: "easeOut" }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-orbitron font-bold text-white mb-4">
-            Skill <span className="text-purple-400">Tree</span>
+            Skill <span className="text-[#ce4993] glow-rose">Tree</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-cyan-400 mx-auto mb-4"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-[#ce4993] to-[#fb9062] mx-auto mb-4 rounded-full shadow-lg shadow-[#ce4993]/50"></div>
           <p className="text-gray-300 font-vt323 text-lg">
             {isMobile ? 'Tap nodes to explore my expertise' : 'Hover over nodes to explore • Drag center nodes to rearrange'}
           </p>

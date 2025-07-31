@@ -27,7 +27,7 @@ const Contact: React.FC = () => {
 
   return (
 
-<section id="contact" className="py-20 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
+<section id="contact" className="py-20 bg-gradient-to-b from-black via-[#0a0a0a] to-[#1a0d1a] relative overflow-hidden transition-all duration-1000">
   {/* BACKGROUND ORBS */}
   <div className="absolute inset-0 opacity-10">
     <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#ce4993] rounded-full blur-3xl"></div>
@@ -38,12 +38,12 @@ const Contact: React.FC = () => {
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 1, ease: "easeOut" }}
       viewport={{ once: true }}
       className="text-center mb-16"
     >
       <h2 className="text-4xl md:text-5xl font-orbitron font-bold text-white mb-4">
-        Summon <span className="text-[#ee5d6c]">Scroll</span>
+        Summon <span className="text-[#ee5d6c] glow-coral">Scroll</span>
       </h2>
       <div className="w-24 h-1 bg-gradient-to-r from-[#fb9062] to-[#6a0d83] mx-auto mb-4"></div>
       <p className="text-gray-300 font-vt323 text-lg">Ready to start your next digital quest?</p>

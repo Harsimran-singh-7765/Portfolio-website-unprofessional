@@ -18,19 +18,19 @@ const Projects: React.FC = () => {
   const visibleProjects = showAll ? projects : projects.slice(0, 4);
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-b from-black to-gray-900">
+    <section id="projects" className="py-20 bg-gradient-to-b from-[#1a0d1a] via-[#0a0a0a] to-black transition-all duration-1000">
       <div className="max-w-7xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1, ease: "easeOut" }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-orbitron font-bold text-white mb-4">
-            Mission <span className="text-cyan-400">Logs</span>
+            Mission <span className="text-[#fb9062] glow-orange">Logs</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-red-400 mx-auto mb-4"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-[#fb9062] to-[#6a0d83] mx-auto mb-4 rounded-full shadow-lg shadow-[#fb9062]/50"></div>
           <p className="text-gray-300 font-vt323 text-lg">Completed quests and ongoing adventures</p>
         </motion.div>
 

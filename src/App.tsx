@@ -15,7 +15,7 @@ function App() {
 
   const handlePreloaderComplete = () => {
     setIsLoading(false);
-    setTimeout(() => setShowContent(true), 100);
+    setTimeout(() => setShowContent(true), 200);
   };
 
   if (isLoading) {
@@ -23,7 +23,7 @@ function App() {
   }
 
   return (
-    <div className={`min-h-screen bg-black text-white overflow-x-hidden transition-opacity duration-1000 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
+    <div className={`min-h-screen bg-gradient-to-br from-black via-[#0a0a0a] to-[#1a0d1a] text-white overflow-x-hidden transition-all duration-1500 ease-out ${showContent ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
       <Navigation />
       <Hero />
       <About />

@@ -120,10 +120,10 @@ useEffect(() => {
     <section
       id="home"
       ref={sectionRef}
-      className="w-full min-h-screen flex items-center justify-center relative overflow-hidden bg-black px-4 py-20 md:py-0"
+      className="w-full min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-black via-[#0a0a0a] to-[#1a0d1a] px-4 py-20 md:py-0 transition-all duration-1000 ease-out"
     >
       {/* 🟣 Background Grid or Particles */}
-      <div className="absolute inset-0 opacity-20 z-0">
+      <div className="absolute inset-0 opacity-10 z-0">
         <div className="grid-background"></div>
       </div>
 
@@ -132,7 +132,10 @@ useEffect(() => {
         {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-[#fb9062] rounded-full hidden md:block"
+            className="absolute w-1 h-1 bg-[#fb9062] rounded-full hidden md:block opacity-60"
+            style={{
+              boxShadow: '0 0 8px #fb9062',
+            }}
             animate={{
               x: [0, Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200)],
               y: [0, Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800)],
@@ -158,24 +161,27 @@ useEffect(() => {
           ref={posterRef}
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1, type: 'spring' }}
+          transition={{ duration: 1.5, type: 'spring', stiffness: 80, damping: 20 }}
           className="bounty-poster mx-auto mb-6 md:mb-8 flex items-center justify-center"
         >
           <div className="relative">
             <motion.div
               className="flex items-center justify-center relative"
               whileHover={{ scale: 1.05 }}
-              transition={{ type: 'spring', stiffness: 100, damping: 10 }}
+              transition={{ type: 'spring', stiffness: 120, damping: 15 }}
             >
               <div
-                className={`w-[280px] h-[350px] sm:w-[320px] sm:h-[400px] md:w-[400px] md:h-[500px] lg:w-[450px] lg:h-[550px] morph-bubble overflow-hidden shadow-xl rounded-[40%/30%] transition-all duration-300 ${
+                className={`w-[280px] h-[350px] sm:w-[320px] sm:h-[400px] md:w-[400px] md:h-[500px] lg:w-[450px] lg:h-[550px] morph-bubble overflow-hidden shadow-2xl rounded-[40%/30%] transition-all duration-500 ease-out ${
                   isGlitching ? 'glitch-box' : ''
                 }`}
+                style={{
+                  boxShadow: '0 0 40px rgba(251, 144, 98, 0.3), 0 0 80px rgba(206, 73, 147, 0.2)',
+                }}
               >
                 <img
                   src={imageSrc}
                   alt={personalInfo.name}
-                  className="w-full h-full object-cover scale-105 transition-transform duration-700 ease-in-out"
+                  className="w-full h-full object-cover scale-105 transition-all duration-700 ease-out"
                   draggable={false}
                 />
               </div>
@@ -187,24 +193,24 @@ useEffect(() => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
+          transition={{ delay: 0.8, duration: 1, ease: "easeOut" }}
           className="mb-6 md:mb-8 px-4"
         >
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-orbitron font-bold mb-4 leading-tight text-white">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-orbitron font-bold mb-4 leading-tight text-white transition-all duration-500">
             {displayLines.map((line, i) => (
               <span
                 key={i}
                 className={`block ${
-                  i === 1 ? 'text-[#ce4993]' : 'text-white'
-                } transition-all duration-300`}
+                  i === 1 ? 'text-[#ce4993] glow-rose' : 'text-white'
+                } transition-all duration-500`}
               >
                 {line}
               </span>
             ))}
-            {isTyping && <span className="text-[#eeaf61] animate-pulse">|</span>}
+            {isTyping && <span className="text-[#eeaf61] animate-pulse glow-sunset-gold">|</span>}
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 font-vt323 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 font-vt323 max-w-2xl mx-auto transition-all duration-500">
             {personalInfo.subtitle}
           </p>
         </motion.div>
@@ -213,11 +219,11 @@ useEffect(() => {
         <motion.button
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.8 }}
-          whileHover={{ scale: 1.05 }}
+          transition={{ delay: 1.2, duration: 1, ease: "easeOut" }}
+          whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(206, 73, 147, 0.6)" }}
           whileTap={{ scale: 0.95 }}
           onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-          className="anime-button bg-gradient-to-r from-[#ee5d6c] to-[#6a0d83] text-white px-6 py-3 md:px-8 md:py-4 rounded-lg font-orbitron font-bold text-base md:text-lg hover:shadow-lg hover:shadow-[#ce4993]/50 transition-all duration-300"
+          className="anime-button bg-gradient-to-r from-[#ee5d6c] to-[#6a0d83] text-white px-6 py-3 md:px-8 md:py-4 rounded-lg font-orbitron font-bold text-base md:text-lg shadow-lg shadow-[#ce4993]/30 transition-all duration-500 ease-out border border-[#ce4993]/20"
         >
           Enter Digital World
         </motion.button>

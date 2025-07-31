@@ -14,7 +14,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   useEffect(() => {
     const tl = gsap.timeline({
       onComplete: () => {
-        setTimeout(onComplete, 500);
+        setTimeout(onComplete, 300);
       }
     });
 
@@ -25,52 +25,52 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       y: 50
     });
 
-    // Animation sequence
+    // Animation sequence with smoother transitions
     tl.to(welcomeRef.current, {
       opacity: 1,
       scale: 1,
       y: 0,
-      duration: 1,
+      duration: 1.2,
       ease: "back.out(1.7)"
     })
     .to(fireTextRef.current, {
       opacity: 1,
       scale: 1,
       y: 0,
-      duration: 0.8,
+      duration: 1,
       ease: "power2.out"
-    }, "-=0.5")
+    }, "-=0.6")
     .to([welcomeRef.current, fireTextRef.current], {
-      scale: 1.2,
-      duration: 0.5,
+      scale: 1.1,
+      duration: 0.6,
       ease: "power2.inOut"
-    }, "+=0.5")
+    }, "+=0.4")
     .to([welcomeRef.current, fireTextRef.current], {
-      scale: 20,
+      scale: 25,
       opacity: 0,
-      duration: 1.2,
+      duration: 1.5,
       ease: "power2.in"
-    }, "+=0.3")
+    }, "+=0.2")
     .to(preloaderRef.current, {
       opacity: 0,
-      duration: 0.8,
+      duration: 1,
       ease: "power2.inOut"
-    }, "-=0.5");
+    }, "-=0.8");
 
-    // Particle animation
+    // Particle animation with city sunset colors
     const particles = particlesRef.current?.children;
     if (particles) {
       Array.from(particles).forEach((particle, i) => {
         gsap.to(particle, {
-          x: `random(-200, 200)`,
-          y: `random(-200, 200)`,
+          x: `random(-300, 300)`,
+          y: `random(-300, 300)`,
           rotation: `random(0, 360)`,
-          scale: `random(0.5, 1.5)`,
-          duration: `random(2, 4)`,
+          scale: `random(0.3, 1.2)`,
+          duration: `random(3, 6)`,
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
-          delay: i * 0.1
+          delay: i * 0.15
         });
       });
     }
@@ -83,74 +83,86 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   return (
     <div
       ref={preloaderRef}
-      className="fixed inset-0 z-50 bg-black flex items-center justify-center overflow-hidden"
+      className="fixed inset-0 z-50 bg-gradient-to-br from-black via-[#1a0d1a] to-[#0d0a1a] flex items-center justify-center overflow-hidden"
     >
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-purple-900/20 to-black">
-        <div className="absolute inset-0 opacity-30">
+      {/* Animated Background with matching colors */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-[#6a0d83]/10 to-[#fb9062]/5">
+        <div className="absolute inset-0 opacity-20">
           <div className="grid-background"></div>
         </div>
       </div>
 
-      {/* Floating Particles */}
+      {/* Floating Particles with city sunset palette */}
       <div ref={particlesRef} className="absolute inset-0 pointer-events-none">
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 bg-gradient-to-r from-orange-400 to-red-500 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
+        {[...Array(20)].map((_, i) => {
+          const colors = ['#fb9062', '#ee5d6c', '#ce4993', '#6a0d83', '#eeaf61'];
+          const color = colors[i % colors.length];
+          return (
+            <div
+              key={i}
+              className="absolute w-2 h-2 rounded-full opacity-60"
+              style={{
+                background: `radial-gradient(circle, ${color}, ${color}88)`,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                boxShadow: `0 0 10px ${color}`,
+              }}
+            />
+          );
+        })}
       </div>
 
       {/* Main Content */}
       <div className="relative z-10 text-center">
-        {/* Welcome Text */}
+        {/* Welcome Text with matching gradient */}
         <div
           ref={welcomeRef}
           className="mb-8"
         >
-          <h1 className="text-4xl md:text-6xl lg:text-8xl font-orbitron font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 mb-4">
+          <h1 className="text-4xl md:text-6xl lg:text-8xl font-orbitron font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#fb9062] via-[#ee5d6c] to-[#ce4993] mb-4 glow-orange">
             WELCOME
           </h1>
-          <div className="w-32 h-1 bg-gradient-to-r from-orange-400 to-red-500 mx-auto"></div>
+          <div className="w-32 h-1 bg-gradient-to-r from-[#fb9062] to-[#6a0d83] mx-auto rounded-full shadow-lg shadow-[#fb9062]/50"></div>
         </div>
 
-        {/* Fire Text Effect */}
+        {/* Fire Text Effect with consistent colors */}
         <div
           ref={fireTextRef}
           className="relative"
         >
-          <div className="text-2xl md:text-4xl font-vt323 text-orange-300 fire-text">
+          <div className="text-2xl md:text-4xl font-vt323 text-[#eeaf61] glow-sunset-gold">
             TO THE DIGITAL REALM
           </div>
           
-          {/* Fire particles */}
+          {/* Fire particles with matching colors */}
           <div className="absolute inset-0 pointer-events-none">
-            {[...Array(8)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute w-1 h-1 bg-orange-400 rounded-full animate-pulse"
-                style={{
-                  left: `${20 + i * 10}%`,
-                  top: `${Math.random() * 100}%`,
-                  animationDelay: `${i * 0.2}s`,
-                }}
-              />
-            ))}
+            {[...Array(12)].map((_, i) => {
+              const colors = ['#fb9062', '#eeaf61', '#ee5d6c'];
+              const color = colors[i % colors.length];
+              return (
+                <div
+                  key={i}
+                  className="absolute w-1 h-1 rounded-full animate-pulse"
+                  style={{
+                    backgroundColor: color,
+                    left: `${15 + i * 6}%`,
+                    top: `${Math.random() * 100}%`,
+                    animationDelay: `${i * 0.15}s`,
+                    boxShadow: `0 0 8px ${color}`,
+                  }}
+                />
+              );
+            })}
           </div>
         </div>
 
-        {/* Loading indicator */}
+        {/* Loading indicator with matching theme */}
         <div className="mt-12">
-          <div className="w-64 h-1 bg-gray-800 rounded-full mx-auto overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-orange-400 to-red-500 rounded-full animate-pulse loading-bar"></div>
+          <div className="w-64 h-2 bg-gray-900/50 rounded-full mx-auto overflow-hidden border border-[#6a0d83]/30">
+            <div className="h-full bg-gradient-to-r from-[#fb9062] to-[#6a0d83] rounded-full animate-pulse loading-bar shadow-lg shadow-[#fb9062]/30"></div>
           </div>
-          <p className="text-orange-300 font-vt323 mt-4 text-lg animate-pulse">
-            Initializing...
+          <p className="text-[#ce4993] font-vt323 mt-4 text-lg animate-pulse glow-rose">
+            Initializing Digital Matrix...
           </p>
         </div>
       </div>
