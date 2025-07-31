@@ -206,9 +206,9 @@ export const skillCategories: Record<string, SkillCategory> = {
       },
     ]
   },
-  'Languages': {
-    name: 'Languages',
-    color: '#ff00aa', // bright magenta for pop!
+  'Lang': {
+    name: 'Lang',
+    color: '#ff00aa', 
     centerX: 600,
     centerY: 150,
     skills: [
